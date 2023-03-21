@@ -1,0 +1,53 @@
+#formContainer {
+  border: #c69c6d 2px solid;
+  border-radius: 5px;
+  margin-top: 30px;
+  width: 100%;
+}
+
+.capContainer, .numeroContainer {
+  width: 15%;
+}
+
+.indirizzoContainer {
+  width: 70%;
+}
+
+#eye {
+  position: absolute;
+  right: 10px;
+  top: 12px;
+}
+
+#link {
+  cursor: pointer;
+}
+
+#registrati {
+  background-color: #c69c6d;
+}
+
+#fakeBody {
+  width: 100%;
+  height: 100%;
+  background-color: #f1e5d7;
+  padding-inline: 10px;
+  padding-bottom: 150px;
+}
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+@media (min-width: 768px) {
+  #formContainer {
+    width: 600px;
+  }
+}
+
+@media (min-width: 1600px) {
+  #fakeBody {
+    padding-bottom: 230px;
+  }
+}

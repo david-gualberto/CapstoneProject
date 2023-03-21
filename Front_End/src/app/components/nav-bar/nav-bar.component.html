@@ -1,0 +1,112 @@
+<!-- Navbar -->
+<nav class="navbar navbar-expand-lg" id="navbar">
+  <!-- Container wrapper -->
+  <div class="container-fluid">
+    <!-- Navbar brand -->
+    <a class="ms-3 navbar-brand"><a class="navbar-brand"><img src="../../../assets/img/logo_nav.png" alt="logo"
+          id="logo"></a></a>
+
+    <!-- Toggle button -->
+    <button class="navbar-toggler" type="button" (click)="basicNavbar.toggle()" aria-expanded="false"
+      aria-label="Toggle navigation">
+      <i id="menuHam" class="fas fa-bars"></i>
+    </button>
+
+    <!-- Collapsible wrapper -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent" mdbCollapse #basicNavbar="mdbCollapse">
+      <!-- Left links -->
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li mdbDropdown class="mx-5 nav-item dropdown">
+          <p class=" dropdown-toggle d-flex align-items-center" id="dropCitta" role="button"
+            mdbDropdownToggle aria-expanded="false">
+            Dove vuoi mangiare?</p>
+          <ul  mdbDropdownMenu class="dropdown-menu boxDropDown" aria-labelledby="dropCitta">
+            <li>
+              <a class="dropdown-item" href="#">Torino</a>
+            </li>
+            <li>
+              <a class="dropdown-item" href="#">Milano</a>
+            </li>
+            <li>
+              <a class="dropdown-item" href="#">Venezia</a>
+            </li>
+            <li>
+              <a class="dropdown-item" href="#">Firenze</a>
+            </li>
+            <li>
+              <a class="dropdown-item" href="#">Roma</a>
+            </li>
+            <li>
+              <a class="dropdown-item" href="#">Napoli</a>
+            </li>
+            <li>
+              <a class="dropdown-item" href="#">Palermo</a>
+            </li>
+          </ul>
+        </li>
+        <li mdbDropdown class=" nav-item dropdown">
+          <p class="mx-5 dropdown-toggle d-flex align-items-center" id="dropCitta" role="button"
+            mdbDropdownToggle aria-expanded="false">
+            Cosa vuoi mangiare?</p>
+          <ul  mdbDropdownMenu class="dropdown-menu boxDropDown" aria-labelledby="dropCitta">
+            <li>
+              <a class="dropdown-item" href="#">Asiatico</a>
+            </li>
+            <li>
+              <a class="dropdown-item" href="#">Mediterraneo</a>
+            </li>
+            <li>
+              <a class="dropdown-item" href="#">Americano</a>
+            </li>
+            <li>
+              <a class="dropdown-item" href="#">Pizza</a>
+            </li>
+            <li>
+              <a class="dropdown-item" href="#">Sushi</a>
+            </li>
+            <li>
+              <a class="dropdown-item" href="#">Vegano</a>
+            </li>
+            <li>
+              <a class="dropdown-item" href="#">Hamburger</a>
+            </li>
+          </ul>
+        </li>
+      </ul>
+      <!-- Left links -->
+      <div class="d-flex align-items-center" id="navButton" *ngIf="!loggato">
+        <button type="button" class="btn button px-3 me-2" routerLink="login">
+          Login
+        </button>
+        <button type="button" class="btn button" routerLink="register">
+          Registrati
+        </button>
+      </div>
+      <li mdbDropdown id="user" class="me-3 nav-item dropdown profile" *ngIf="loggato">
+        <a class="nav-link dropdown-toggle d-flex align-items-center" href="#" id="iconaUser" role="button"
+          mdbDropdownToggle aria-expanded="false">
+          <i class="fas fa-user-circle"></i>
+        </a>
+        <ul mdbDropdownMenu class="dropdown-menu boxDropDown" aria-labelledby="figlio">
+          <li>
+            <a class="dropdown-item" href="#">Profilo</a>
+          </li>
+          <li>
+            <a class="dropdown-item" href="#">Le mie prenotazioni</a>
+          </li>
+          <li>
+            <a class="dropdown-item" href="#">I miei favoriti</a>
+          </li>
+          <li>
+            <a id="logout" class="dropdown-item" (click)="logout()">Logout</a>
+          </li>
+        </ul>
+      </li>
+
+
+    </div>
+    <!-- Collapsible wrapper -->
+  </div>
+  <!-- Container wrapper -->
+</nav>
+<!-- Navbar -->

@@ -1,0 +1,23 @@
+<div id="fakeBody" class="pt-5 d-flex flex-column align-items-center">
+  <div class="mb-5">
+    <img src="../../../assets/img/Logo_cut.png" alt="logo">
+  </div>
+  <div id="formContainer">
+    <form class="example-form p-3" #l="ngForm" (ngSubmit)="login(l)">
+      <div class="d-flex flex-column">
+        <mdb-form-control class="my-2 me-2 w-100">
+          <input mdbInput class="form-control bg-light" type="text" id="username" name="username" #username="ngModel" ngModel required/>
+          <label mdbLabel class="form-label" for="username">Username</label>
+        </mdb-form-control>
+        <mdb-form-control class="my-2 w-100">
+          <input mdbInput class="form-control bg-light" type="password" id="password" name="password" #password="ngModel" ngModel required/>
+          <label mdbLabel class="form-label" for="password">Password</label>
+        </mdb-form-control>
+      </div>
+      <p class="text-danger">{{err}}</p>
+      <button [disabled]="l.invalid" class="btn btn-primary text-dark" id="login" type="submit">Login</button>
+    </form>
+    <p class="ms-3">Se non sei registrato... <a id="link" routerLink="/register" class="text-primary"><i>Clicca qui</i></a>...</p>
+  </div>
+</div>
+<app-footer></app-footer>

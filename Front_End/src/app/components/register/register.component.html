@@ -1,0 +1,92 @@
+<div id="fakeBody" class="d-flex flex-column align-items-center">
+  <div id="imgContainer" class="mb-5">
+    <img src="../../../assets/img/Logo_cut.png" alt="logo">
+  </div>
+  <div id="formContainer">
+    <form form class="example-form p-3" [formGroup]="f" (ngSubmit)="register(f)">
+      <div class="d-flex w-100">
+        <mdb-form-control class="my-2 me-2 w-50">
+          <input mdbInput type="text" id="name" class="form-control bg-light" formControlName="name" required />
+          <label mdbLabel class="form-label" for="name">Nome</label>
+        </mdb-form-control>
+        <mdb-form-control class="my-2 w-50">
+          <input mdbInput type="text" id="surname" class="form-control bg-light" formControlName="surname" required />
+          <label mdbLabel class="form-label" for="surname">Cognome</label>
+        </mdb-form-control>
+      </div>
+      <div
+        *ngIf="f.controls['name'].invalid && f.controls['name'].touched || f.controls['surname'].invalid && f.controls['surname'].touched"
+        class="d-flex mb-2 alert-danger rounded p-2">
+        <div>Campo obbligatorio</div>
+      </div>
+      <mdb-form-control class="mb-2 w-100">
+        <input mdbInput type="email" id="email" class="form-control bg-light" formControlName="email" />
+        <label mdbLabel class="form-label" for="email">Email</label>
+      </mdb-form-control>
+      <div *ngIf="f.controls['email'].invalid && f.controls['email'].touched" class="rounded p-2 alert-danger">
+        <div *ngIf="f.controls['email'].hasError('required')">Campo obbligatorio</div>
+        <div *ngIf="f.controls['email'].hasError('email')">Formato email non valida</div>
+      </div>
+      <mdb-form-control class="my-2 w-100">
+        <input mdbInput type="text" id="username" class="form-control bg-light" formControlName="username"
+          minlength="3" />
+        <label mdbLabel class="form-label" for="username">Username</label>
+      </mdb-form-control>
+      <div *ngIf="f.controls['username'].invalid && (f.controls['username'].dirty || f.controls['username'].touched)"
+        class="rounded p-2 alert-danger">
+        <div *ngIf="f.controls['username'].hasError('required')">Username è obbligatorio</div>
+        <div *ngIf="f.controls['username'].hasError('minlength')">Username deve avere almeno 3 caratteri</div>
+      </div>
+      <mdb-form-control class="my-2 w-100 position-relative">
+        <input mdbInput [type]="passwordFieldType" id="password" class="form-control bg-light" formControlName="password" />
+        <label mdbLabel class="form-label" for="password">Password </label>
+        <span id="eye" class="fas" (click)="mostraNascondiPassword()" [class.fa-eye]="passwordFieldType === 'password'" [class.fa-eye-slash]="passwordFieldType !== 'password'"></span>
+      </mdb-form-control>
+      <div *ngIf="f.controls['password'].invalid && (f.controls['password'].dirty || f.controls['password'].touched)"
+      class="rounded p-2 alert-danger">
+      <div *ngIf="f.controls['password'].hasError('pattern')"> La password deve contenere:
+        <ul>
+          <li>Almeno un carattere minuscolo</li>
+          <li>Almeno un carattere maiuscolo</li>
+          <li>Almeno un carattere speciale (@$!%*?&)</li>
+          <li>minimo 8 caratteri</li>
+        </ul>
+      </div>
+      <div *ngIf="f.controls['password'].hasError('required')">La password è obbligatoria</div>
+    </div>
+      <mdb-form-control class="my-2 w-100">
+        <input mdbInput type="text" id="city" class="form-control bg-light" formControlName="city" />
+        <label mdbLabel class="form-label" for="city">Città</label>
+      </mdb-form-control>
+      <div *ngIf="f.controls['city'].invalid && f.controls['city'].touched" class=" mb-2 rounded p-2 alert-danger">
+        <div>Campo obbligatorio</div>
+      </div>
+      <div class="d-flex w-100 mb-2">
+        <mdb-form-control class="me-2 indirizzoContainer">
+          <input mdbInput type="text" id="street" class="form-control bg-light" formControlName="street" />
+          <label mdbLabel class="form-label" for="street">Indirizzo</label>
+        </mdb-form-control>
+        <mdb-form-control class="mx-2 numeroContainer">
+          <input mdbInput type="number" id="number" class="form-control bg-light" formControlName="number" />
+          <label mdbLabel class="form-label" for="number">N.</label>
+        </mdb-form-control>
+        <mdb-form-control class="ms-2 capContainer">
+          <input mdbInput type="number" id="postCode" class="form-control bg-light w-100" formControlName="postCode" />
+          <label mdbLabel class="form-label" for="postCode">CAP</label>
+        </mdb-form-control>
+      </div>
+      <div
+        *ngIf="f.controls['postCode'].invalid && f.controls['postCode'].touched || f.controls['number'].invalid && f.controls['number'].touched || f.controls['street'].invalid && f.controls['street'].touched"
+        class="rounded p-2 alert-danger">
+        <div>Campo obbligatorio</div>
+      </div>
+      <button [disabled]="f.invalid" class="btn btn-primary mt-2 text-dark" id="registrati"
+        type="submit">Registrati</button>
+        <div *ngIf="err !== ''">
+          <div class=" mt-2 alert-danger rounded" >{{err}}</div>
+        </div>
+    </form>
+    <p class="ms-3">Se sei già registrato... <a id="link" routerLink="/login" class="text-primary"><i>Clicca qui</i></a>...</p>
+  </div>
+</div>
+<app-footer></app-footer>

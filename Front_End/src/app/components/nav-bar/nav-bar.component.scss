@@ -1,0 +1,73 @@
+.profile {
+  list-style: none;
+  font-size: 30px;
+}
+
+#navbar {
+  background-color: #f1e5d7;
+  padding: 0px;
+}
+
+.button {
+  background-color: #c69c6d;
+}
+
+#logo {
+  width: 80px;
+}
+
+.fa-user-circle{
+  color: #c69c6d;
+  font-size: 40px;
+}
+
+.dropdown-toggle::after {
+  display: none;
+}
+
+#menuHam {
+  font-size: 25px;
+}
+#user{
+  margin-left: 30px;
+}
+#dropCitta{
+  margin-top: 15px;
+  color: black;
+  font-size: 20px;
+  font-weight: 500;
+}
+
+#logout{
+  cursor: pointer;
+}
+
+.boxDropDown{
+  background-color: #f1e5d7;
+  box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
+}
+
+@media (min-width: 991px) {
+  #user{
+    position: absolute;
+    top: 10px;
+    right: 50px;
+  }
+
+  #iconaUser{
+    position: relative;
+    top: 10px;
+    right: 40px;
+  }
+}
+
+@media (max-width: 991px) {
+  #logo{
+   margin-left: 35px;
+  }
+
+  #navButton {
+    margin-bottom: 15px;
+    margin-left: 48px;
+  }
+}
