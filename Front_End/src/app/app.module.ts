@@ -26,7 +26,8 @@ import { FooterComponent } from './components/footer/footer.component';
 import { LoginComponent } from './components/login/login.component';
 import { NavBarComponent } from './components/nav-bar/nav-bar.component';
 import { HomeComponent } from './components/home/home.component';
-
+import { CardComponent } from './components/card/card.component';
+import { SearchResultsComponent } from './components/search-results/search-results.component';
 
 @NgModule({
   declarations: [
@@ -35,7 +36,9 @@ import { HomeComponent } from './components/home/home.component';
     FooterComponent,
     LoginComponent,
     NavBarComponent,
-    HomeComponent
+    HomeComponent,
+    CardComponent,
+    SearchResultsComponent
   ],
   imports: [
     HttpClientModule,

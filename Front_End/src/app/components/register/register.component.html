@@ -38,22 +38,24 @@
         <div *ngIf="f.controls['username'].hasError('minlength')">Username deve avere almeno 3 caratteri</div>
       </div>
       <mdb-form-control class="my-2 w-100 position-relative">
-        <input mdbInput [type]="passwordFieldType" id="password" class="form-control bg-light" formControlName="password" />
+        <input mdbInput [type]="passwordFieldType" id="password" class="form-control bg-light"
+          formControlName="password" />
         <label mdbLabel class="form-label" for="password">Password </label>
-        <span id="eye" class="fas" (click)="mostraNascondiPassword()" [class.fa-eye]="passwordFieldType === 'password'" [class.fa-eye-slash]="passwordFieldType !== 'password'"></span>
+        <span id="eye" class="fas" (click)="mostraNascondiPassword()" [class.fa-eye]="passwordFieldType === 'password'"
+          [class.fa-eye-slash]="passwordFieldType !== 'password'"></span>
       </mdb-form-control>
       <div *ngIf="f.controls['password'].invalid && (f.controls['password'].dirty || f.controls['password'].touched)"
-      class="rounded p-2 alert-danger">
-      <div *ngIf="f.controls['password'].hasError('pattern')"> La password deve contenere:
-        <ul>
-          <li>Almeno un carattere minuscolo</li>
-          <li>Almeno un carattere maiuscolo</li>
-          <li>Almeno un carattere speciale (@$!%*?&)</li>
-          <li>minimo 8 caratteri</li>
-        </ul>
+        class="rounded p-2 alert-danger">
+        <div *ngIf="f.controls['password'].hasError('pattern')"> La password deve contenere:
+          <ul>
+            <li>Almeno un carattere minuscolo</li>
+            <li>Almeno un carattere maiuscolo</li>
+            <li>Almeno un carattere speciale (@$!%*?&)</li>
+            <li>Minimo 8 caratteri</li>
+          </ul>
+        </div>
+        <div *ngIf="f.controls['password'].hasError('required')">La password è obbligatoria</div>
       </div>
-      <div *ngIf="f.controls['password'].hasError('required')">La password è obbligatoria</div>
-    </div>
       <mdb-form-control class="my-2 w-100">
         <input mdbInput type="text" id="city" class="form-control bg-light" formControlName="city" />
         <label mdbLabel class="form-label" for="city">Città</label>
@@ -82,9 +84,9 @@
       </div>
       <button [disabled]="f.invalid" class="btn btn-primary mt-2 text-dark" id="registrati"
         type="submit">Registrati</button>
-        <div *ngIf="err !== ''">
-          <div class=" mt-2 alert-danger rounded" >{{err}}</div>
-        </div>
+      <div *ngIf="err !== ''">
+        <div class=" mt-2 alert-danger rounded">{{err}}</div>
+      </div>
     </form>
     <p class="ms-3">Se sei già registrato... <a id="link" routerLink="/login" class="text-primary"><i>Clicca qui</i></a>...</p>
   </div>
