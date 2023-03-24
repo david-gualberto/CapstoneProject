@@ -38,13 +38,25 @@
   font-weight: 500;
 }
 
-#logout{
+.cursor{
   cursor: pointer;
 }
 
 .boxDropDown{
   background-color: #f1e5d7;
   box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
+}
+
+#hello {
+  color: #f1e5d7;
+  background-color: #c69c6d;
+  p{
+    color: #f1e5d7;
+    font-weight: 500;
+    &:hover {
+      background-color: #c69c6d;
+    }
+  }
 }
 
 @media (min-width: 991px) {

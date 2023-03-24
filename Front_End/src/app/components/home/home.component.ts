@@ -16,16 +16,34 @@ export class HomeComponent implements OnInit {
   @ViewChild('searchBar') searchBar!: ElementRef;
 
   constructor(private resServ: RestaurantService, private router:Router) {}
+  // variabili per progress bar
+  progress: number = 0;
+  isLoading:boolean = true;
 
+  //variabili per chiamata ristoranti
   api!: ApiResponse;
   record!: Records;
-  listRestaurant!: Restaurant[];
+  listRestaurant: Restaurant[] = [];
+
+  //variabili per scroll
   isDragging: boolean = false;
   startX: number = 0;
   scrollLeft: number = 0;
 
   ngOnInit(): void {
-   //this.roma();
+    this.loadData();
+    //this.roma();
+  }
+
+  loadData() {
+    let timer = setInterval(() => {
+      if (this.progress < 100) {
+        this.progress += 10;
+      } else {
+        this.isLoading = false;
+        clearInterval(timer);
+      }
+    }, 200);
   }
 
   //  chiamata per i ristoranti roma
@@ -33,16 +51,22 @@ export class HomeComponent implements OnInit {
     this.resServ.getRestaurantRome().subscribe((res) => {
       this.api = res;
       this.record = this.api.data;
-      this.listRestaurant = this.record.data;
+      for(let i = 0; i<11; i++) {
+          this.listRestaurant.push(this.record.data[i])
+      }
+      //this.listRestaurant = this.record.data;
+      console.log(this.listRestaurant)
     });
   }
 
   // scroll-x tramite i bottoni
   left() {
     this.containerCard.nativeElement.scrollLeft -= 250;
+    this.isDragging = false;
   }
   right() {
     this.containerCard.nativeElement.scrollLeft += 250;
+    this.isDragging = false;
   }
 
   //drag del mouse per scroll-x delle card

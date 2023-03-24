@@ -28,6 +28,7 @@ import { NavBarComponent } from './components/nav-bar/nav-bar.component';
 import { HomeComponent } from './components/home/home.component';
 import { CardComponent } from './components/card/card.component';
 import { SearchResultsComponent } from './components/search-results/search-results.component';
+import { LandingPageComponent } from './components/landing-page/landing-page.component';
 
 @NgModule({
   declarations: [
@@ -38,7 +39,8 @@ import { SearchResultsComponent } from './components/search-results/search-resul
     NavBarComponent,
     HomeComponent,
     CardComponent,
-    SearchResultsComponent
+    SearchResultsComponent,
+    LandingPageComponent
   ],
   imports: [
     HttpClientModule,

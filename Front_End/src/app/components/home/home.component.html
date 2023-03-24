@@ -1,31 +1,50 @@
-<app-nav-bar></app-nav-bar>
-<div class="input-group container my-5">
-  <div class="form-outline d-flex w-100">
-    <div class="w-100">
-      <input type="search" id="searchBar" #searchBar class="form-control w-100 border" />
-      <label id="labelSearch" class="form-label" for="searchBar">Cerca il tuo ristorante preferito...</label>
+<div class="progress" *ngIf="isLoading == true">
+  <div class="progress-bar" role="progressbar" [style.width.%]="progress" [attr.aria-valuenow]="progress"
+    aria-valuemin="0" aria-valuemax="100">
+    {{progress}}%
+  </div>
+</div>
+<div *ngIf="isLoading == false">
+  <app-nav-bar></app-nav-bar>
+  <div id="searchArea" class="container-fluid">
+    <div class="input-group container my-5">
+      <div class="form-outline d-flex w-100">
+        <div class="w-100">
+          <input type="search" id="searchBar" #searchBar class="form-control w-100 border bg-light" />
+          <label id="labelSearch" class="form-label" for="searchBar">Cerca il tuo ristorante preferito...</label>
+        </div>
+        <div>
+          <button id="buttonSearch" type="button" class="ms-3 btn btn-primary">
+            <i id="search" class="fas fa-search" (click)="search(searchBar.value)"></i>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div id="buttonContainer">
+  <img class="btn p-2 button" src="../../../assets/img/1404945.png" alt="">
+  <img class="btn p-2 button" src="../../../assets/img/1404945.png" alt="">
+  <img class="btn p-2 button" src="../../../assets/img/1404945.png" alt="">
+  <img class="btn p-2 button" src="../../../assets/img/1404945.png" alt="">
+  <img class="btn p-2 button" src="../../../assets/img/1404945.png" alt="">
+  <img class="btn p-2 button" src="../../../assets/img/1404945.png" alt="">
+  <img class="btn p-2 button" src="../../../assets/img/1404945.png" alt="">
+  </div>
+  <!-- <div id="carousel" class="container" (mousedown)="onMouseDown($event)">
+    <div>
+      <h4 class="ms-2">Dove mangiare a Roma...</h4>
     </div>
     <div>
-      <button id="buttonSearch" type="button" class="ms-3 btn btn-primary">
-        <i id="search" class="fas fa-search" (click)="search(searchBar.value)"></i>
-      </button>
+      <i (click)="left()" id="left" class="fas fa-chevron-circle-left"></i>
     </div>
-  </div>
-</div>
-<div id="carousel" class="container" (mousedown)="onMouseDown($event)">
-  <div>
-    <h4 class="ms-2">Dove mangiare a Roma...</h4>
-  </div>
-  <div>
-    <i (click)="left()" id="left" class="fas fa-chevron-circle-left"></i>
-  </div>
-  <div #containerCard id="containerCard" class="container" (mousemove)="onMouseMove($event)" (mouseup)="onMouseUp()">
-    <div id="card" class="card m-2" *ngFor="let l of listRestaurant">
-      <app-card [restaurant]="l"></app-card>
+    <div #containerCard id="containerCard" class="container" (mousemove)="onMouseMove($event)" (mouseup)="onMouseUp()">
+      <div id="card" class="card m-2" *ngFor="let l of listRestaurant">
+        <app-card [restaurant]="l"></app-card>
+      </div>
     </div>
-  </div>
-  <div>
-    <i (click)="right()" id="right" class="fas fa-chevron-circle-right"></i>
-  </div>
+    <div>
+      <i (click)="right()" id="right" class="fas fa-chevron-circle-right"></i>
+    </div>
+  </div> -->
+  <app-footer></app-footer>
 </div>
-<app-footer></app-footer>

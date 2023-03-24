@@ -10,8 +10,8 @@ import { AuthService } from 'src/app/services/auth.service';
 })
 export class NavBarComponent implements OnInit {
   //variabile booleana per la visuale di loggato e non loggato
-  loggato:boolean = false;
-  user:JwtResponse| undefined;
+  logged:boolean = false;
+  user!:JwtResponse| undefined;
   constructor(private authSrv:AuthService) { }
 
   ngOnInit(): void {
@@ -20,10 +20,10 @@ export class NavBarComponent implements OnInit {
       const token = userObj.token;
       const decodedToken = jwtDecode<any>(token);
       if (decodedToken.exp < Date.now() / 1000) {
-        this.loggato = false;
+        this.logged = false;
         localStorage.removeItem('user')
       } else {
-        this.loggato = true;
+        this.logged = true;
         this.user = userObj;
       }
     }
@@ -31,6 +31,6 @@ export class NavBarComponent implements OnInit {
 
   logout(){
     this.authSrv.logout();
-    this.loggato = false;
+    this.logged = false;
   }
 }

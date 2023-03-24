@@ -17,10 +17,10 @@
       <!-- Left links -->
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
         <li mdbDropdown class="mx-5 nav-item dropdown">
-          <p class=" dropdown-toggle d-flex align-items-center" id="dropCitta" role="button"
-            mdbDropdownToggle aria-expanded="false">
+          <p class=" dropdown-toggle d-flex align-items-center" id="dropCitta" role="button" mdbDropdownToggle
+            aria-expanded="false">
             Dove vuoi mangiare?</p>
-          <ul  mdbDropdownMenu class="dropdown-menu boxDropDown" aria-labelledby="dropCitta">
+          <ul mdbDropdownMenu class="dropdown-menu boxDropDown" aria-labelledby="dropCitta">
             <li>
               <a class="dropdown-item" href="#">Torino</a>
             </li>
@@ -45,10 +45,10 @@
           </ul>
         </li>
         <li mdbDropdown class=" nav-item dropdown">
-          <p class="mx-5 dropdown-toggle d-flex align-items-center" id="dropCitta" role="button"
-            mdbDropdownToggle aria-expanded="false">
+          <p class="mx-5 dropdown-toggle d-flex align-items-center" id="dropCitta" role="button" mdbDropdownToggle
+            aria-expanded="false">
             Cosa vuoi mangiare?</p>
-          <ul  mdbDropdownMenu class="dropdown-menu boxDropDown" aria-labelledby="dropCitta">
+          <ul mdbDropdownMenu class="dropdown-menu boxDropDown" aria-labelledby="dropCitta">
             <li>
               <a class="dropdown-item" href="#">Asiatico</a>
             </li>
@@ -74,7 +74,7 @@
         </li>
       </ul>
       <!-- Left links -->
-      <div class="d-flex align-items-center" id="navButton" *ngIf="!loggato">
+      <div class="d-flex align-items-center" id="navButton" *ngIf="!logged">
         <button type="button" class="btn button px-3 me-2" routerLink="login">
           Login
         </button>
@@ -82,28 +82,29 @@
           Registrati
         </button>
       </div>
-      <li mdbDropdown id="user" class="me-3 nav-item dropdown profile" *ngIf="loggato">
-        <a class="nav-link dropdown-toggle d-flex align-items-center" href="#" id="iconaUser" role="button"
-          mdbDropdownToggle aria-expanded="false">
-          <i class="fas fa-user-circle"></i>
-        </a>
-        <ul mdbDropdownMenu class="dropdown-menu boxDropDown" aria-labelledby="figlio">
-          <li>
-            <a class="dropdown-item" href="#">Profilo</a>
-          </li>
-          <li>
-            <a class="dropdown-item" href="#">Le mie prenotazioni</a>
-          </li>
-          <li>
-            <a class="dropdown-item" href="#">I miei favoriti</a>
-          </li>
-          <li>
-            <a id="logout" class="dropdown-item" (click)="logout()">Logout</a>
-          </li>
-        </ul>
-      </li>
-
-
+        <li mdbDropdown id="user" class="me-3 nav-item dropdown profile" *ngIf="logged">
+          <a class="nav-link dropdown-toggle d-flex align-items-center" href="#" id="iconaUser" role="button"
+            mdbDropdownToggle aria-expanded="false">
+            <i class="fas fa-user-circle"></i>
+          </a>
+          <ul mdbDropdownMenu class="dropdown-menu boxDropDown" aria-labelledby="figlio">
+            <li id="hello">
+              <p class=" mb-0 dropdown-item" *ngIf="user">Ciao, {{user.name}}</p>
+            </li>
+            <li>
+              <a class="dropdown-item cursor">Profilo</a>
+            </li>
+            <li>
+              <a class="dropdown-item cursor">Le mie prenotazioni</a>
+            </li>
+            <li>
+              <a class="dropdown-item cursor">I miei favoriti</a>
+            </li>
+            <li>
+              <a class="dropdown-item cursor" (click)="logout()">Logout</a>
+            </li>
+          </ul>
+        </li>
     </div>
     <!-- Collapsible wrapper -->
   </div>
