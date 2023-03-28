@@ -12,14 +12,15 @@ import it.davidgualberto.apt.entities.Reservation;
 public class ReservationConfig {
 	@Bean
 	@Scope("prototype")
-	public Reservation reservation(String idr, String res,int num, LocalDate d, LocalDate rd, LocalTime h) {
+	public Reservation reservation(String idr, String res,int num, LocalDate d, LocalDate rd, LocalTime h, String c) {
 		return Reservation.builder()
 				.idrestaurant(idr)
 				.restaurant(res)
 				.numPax(num)
 				.date(d)
 				.reservationDate(rd)
-				.hour(h)
+				.hour(LocalTime.of(h.getHour(), h.getMinute()))
+				.city(c)
 				.build();
 	}
 }

@@ -4,6 +4,9 @@ import { Router } from '@angular/router';
 import { catchError } from 'rxjs';
 import { Register } from 'src/app/interfaces/register';
 import { AuthService } from 'src/app/services/auth.service';
+import { MdbModalRef, MdbModalService } from 'mdb-angular-ui-kit/modal';
+import { ModalComponent } from '../modal/modal.component';
+
 
 @Component({
   selector: 'app-register',
@@ -23,7 +26,10 @@ export class RegisterComponent implements OnInit {
   n:number = 0;
   numParse:string = '';
 
-  constructor(private authSrv:AuthService, private r:Router) { }
+  //modale
+  modalRef: MdbModalRef<ModalComponent> | null = null;
+
+  constructor(private authSrv:AuthService, private r:Router, private modalService: MdbModalService) { }
 
   ngOnInit(): void {
     this.f = new FormGroup({
@@ -59,16 +65,23 @@ export class RegisterComponent implements OnInit {
     this.authSrv.register(user).pipe(catchError(err=>{
       this.err = err.error.message
       if (err.status == 200) {
+        this.openModal()
         this.r.navigate(["login"])
       }
       throw err
     })).subscribe(res=> {
       console.log(res);
     })
+    console.log(user)
   }
 
   mostraNascondiPassword(): void {
     this.showPassword = !this.showPassword;
     this.passwordFieldType = this.showPassword ? 'text' : 'password';
   }
+
+  openModal() {
+    this.modalRef = this.modalService.open(ModalComponent)
+  }
+
 }

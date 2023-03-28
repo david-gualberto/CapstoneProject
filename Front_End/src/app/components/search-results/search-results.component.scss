@@ -1,0 +1,26 @@
+.progress {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 60%;
+  max-width: 600px;
+  z-index: 9999;
+  height: 30px;
+  border-radius: 30px;
+}
+
+.progress-bar {
+  background-color: #c69c6d;
+  text-align: center;
+  line-height: 30px;
+  font-size: 1.2rem;
+  color: #f1e5d7;
+  transition: transform 2s linear;
+  position: relative;
+  overflow: visible;
+}
+
+#containerMessage {
+  height: 940px;
+}

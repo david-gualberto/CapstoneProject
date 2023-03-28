@@ -15,7 +15,6 @@ public class UserService {
 		
 		public void save(User e) {
 			ur.save(e);
-			System.out.println("Utente iscritto con successo");
 		}
 		
 		public Optional<User> getById(int id) {

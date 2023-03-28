@@ -1,92 +1,5 @@
-@import '~swiper/swiper-bundle.css';
-
-#search, #buttonSearch {
-  background-color: #c69c6d;
-}
-
-#buttonSearch {
-  height: 37px;
-}
-
-#searchBar {
-  border-radius: 20px;
-}
-
-#searchArea{
-  display: flex;
-  width: 100%;
-  height: 40vh;
-  background-image: url("../../../assets/img/food.jpg");
-  background-size: contain;
-  background-repeat: repeat;
-}
-
-#buttonContainer{
-
-    img{
-      padding:20px;
-      width: 50px;
-    }
-}
-
-#labelSearch {
-  color: #c69c6d;
-}
-
-#card {
-  width: 350px;
-  flex: 0 0 auto;
-}
-
-#containerCard {
-  display: flex;
-  overflow-x: scroll;
-  padding-left: 0;
-  cursor: grab;
-}
-
-#carousel {
-position: relative;
-padding-left: 15px;
-  i{
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    font-size: 36px;
-    color: #c69c6d;
-    opacity: 0.8;
-    cursor: pointer;
-  }
- }
-
-#carousel #left {
-  left: -25px;
-  z-index: 1000;
-}
-
-#carousel #right {
-  right: -30px;
-  z-index: 1000;
-}
-
-.button {
-  opacity: 0.8;
-  padding: 5px 20px;
-  background-color: #f1e5d7;
-  font-size: 30px;
-  color:#c69c6d;
-}
-
-::-webkit-scrollbar{
- display: none;
-}
-
-@media (max-width: 790px) {
-#right, #left{
-display: none;
-}
-}
-
+@import "~swiper/swiper-bundle.css";
+//progress bar
 .progress {
   position: fixed;
   top: 50%;
@@ -104,10 +17,131 @@ display: none;
   text-align: center;
   line-height: 30px;
   font-size: 1.2rem;
-  color:#f1e5d7;
+  color: #f1e5d7;
   transition: transform 2s linear;
   position: relative;
   overflow: visible;
 }
 
+#search,
+#buttonSearch {
+  background-color: #c69c6d;
+}
 
+#buttonSearch {
+  height: 37px;
+}
+
+#searchBar {
+  border-radius: 20px;
+}
+
+#searchArea {
+  display: flex;
+  width: 100%;
+  height: 40vh;
+  background-image: url("../../../assets/img/food.jpg");
+  background-size: contain;
+  background-repeat: repeat;
+}
+
+#buttonContainer {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content:space-evenly;
+  img {
+    padding: 20px;
+    width: 50px;
+  };
+  p{
+    font-weight: 500;
+  }
+}
+
+#labelSearch {
+  color: #c69c6d;
+}
+
+//carousel e card
+
+#card {
+  width: 350px;
+  flex: 0 0 auto;
+}
+
+#containerCard {
+  display: flex;
+  overflow-x: scroll;
+  padding-left: 0;
+  cursor: grab;
+}
+
+#carousel {
+  position: relative;
+  padding-left: 15px;
+  i {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 36px;
+    color: #c69c6d;
+    opacity: 0.8;
+    cursor: pointer;
+  }
+}
+
+#carousel #left {
+  left: -25px;
+  z-index: 1000;
+}
+
+#carousel #right {
+  right: -30px;
+  z-index: 1000;
+}
+
+.button {
+  opacity: 0.8;
+  padding: 5px 20px;
+  background-color: #f1e5d7;
+  font-size: 30px;
+  color: #c69c6d;
+}
+
+::-webkit-scrollbar {
+  display: none;
+}
+
+@media (max-width: 790px) {
+  #right,
+  #left {
+    display: none;
+  }
+}
+
+@media (max-width: 575px) {
+  #buttonContainer {
+    img{
+        margin-inline: 60px;
+    }
+
+  }
+}
+
+@media (max-width: 342px) {
+  #buttonContainer {
+    img{
+        margin-inline: 30px;
+    }
+
+  }
+}
+
+@media (max-width: 450px) {
+  #searchArea {
+    background-repeat: inherit;
+    label {
+      font-size: 0.8rem;
+    }
+  }
+}

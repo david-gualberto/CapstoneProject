@@ -29,6 +29,7 @@ import { HomeComponent } from './components/home/home.component';
 import { CardComponent } from './components/card/card.component';
 import { SearchResultsComponent } from './components/search-results/search-results.component';
 import { LandingPageComponent } from './components/landing-page/landing-page.component';
+import { ModalComponent } from './components/modal/modal.component';
 
 @NgModule({
   declarations: [
@@ -40,7 +41,8 @@ import { LandingPageComponent } from './components/landing-page/landing-page.com
     HomeComponent,
     CardComponent,
     SearchResultsComponent,
-    LandingPageComponent
+    LandingPageComponent,
+    ModalComponent
   ],
   imports: [
     HttpClientModule,

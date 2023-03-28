@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { JwtResponse } from 'src/app/interfaces/jwt-response';
 import jwtDecode from 'jwt-decode';
 import { AuthService } from 'src/app/services/auth.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-nav-bar',
@@ -9,28 +10,19 @@ import { AuthService } from 'src/app/services/auth.service';
   styleUrls: ['./nav-bar.component.scss']
 })
 export class NavBarComponent implements OnInit {
-  //variabile booleana per la visuale di loggato e non loggato
-  logged:boolean = false;
+
   user!:JwtResponse| undefined;
-  constructor(private authSrv:AuthService) { }
+
+  constructor(private authSrv:AuthService, private r:Router) { }
 
   ngOnInit(): void {
     if(localStorage.getItem('user')) {
       const userObj = JSON.parse(localStorage.getItem('user') ?? "");
-      const token = userObj.token;
-      const decodedToken = jwtDecode<any>(token);
-      if (decodedToken.exp < Date.now() / 1000) {
-        this.logged = false;
-        localStorage.removeItem('user')
-      } else {
-        this.logged = true;
-        this.user = userObj;
-      }
+      this.user = userObj;
     }
   }
 
   logout(){
     this.authSrv.logout();
-    this.logged = false;
   }
 }

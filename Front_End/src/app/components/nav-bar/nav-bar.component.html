@@ -3,7 +3,7 @@
   <!-- Container wrapper -->
   <div class="container-fluid">
     <!-- Navbar brand -->
-    <a class="ms-3 navbar-brand"><a class="navbar-brand"><img src="../../../assets/img/logo_nav.png" alt="logo"
+    <a class="ms-3 navbar-brand"><a class="navbar-brand cursor" routerLink="/home"><img src="../../../assets/img/logo_nav.png" alt="logo"
           id="logo"></a></a>
 
     <!-- Toggle button -->
@@ -44,7 +44,7 @@
             </li>
           </ul>
         </li>
-        <li mdbDropdown class=" nav-item dropdown">
+        <!-- <li mdbDropdown class=" nav-item dropdown">
           <p class="mx-5 dropdown-toggle d-flex align-items-center" id="dropCitta" role="button" mdbDropdownToggle
             aria-expanded="false">
             Cosa vuoi mangiare?</p>
@@ -71,19 +71,19 @@
               <a class="dropdown-item" href="#">Hamburger</a>
             </li>
           </ul>
-        </li>
+        </li> -->
       </ul>
       <!-- Left links -->
-      <div class="d-flex align-items-center" id="navButton" *ngIf="!logged">
+      <!-- <div class="d-flex align-items-center" id="navButton" *ngIf="!logged">
         <button type="button" class="btn button px-3 me-2" routerLink="login">
           Login
         </button>
         <button type="button" class="btn button" routerLink="register">
           Registrati
         </button>
-      </div>
-        <li mdbDropdown id="user" class="me-3 nav-item dropdown profile" *ngIf="logged">
-          <a class="nav-link dropdown-toggle d-flex align-items-center" href="#" id="iconaUser" role="button"
+      </div> -->
+        <li mdbDropdown id="user" class="me-3 nav-item dropdown profile">
+          <a class="nav-link dropdown-toggle d-flex align-items-center" id="iconaUser" role="button"
             mdbDropdownToggle aria-expanded="false">
             <i class="fas fa-user-circle"></i>
           </a>

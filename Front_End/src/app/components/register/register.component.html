@@ -56,10 +56,37 @@
         </div>
         <div *ngIf="f.controls['password'].hasError('required')">La password è obbligatoria</div>
       </div>
-      <mdb-form-control class="my-2 w-100">
-        <input mdbInput type="text" id="city" class="form-control bg-light" formControlName="city" />
-        <label mdbLabel class="form-label" for="city">Città</label>
-      </mdb-form-control>
+      <label class="form-check-label" for="city">Città:</label>
+      <div class="my-2 w-100 d-flex justify-content-between">
+        <div class="form-check">
+          <input class="form-check-input" type="radio" formControlName="city" id="city1" value="Firenze" />
+          <label class="form-check-label" for="city1">Firenze</label>
+        </div>
+        <div class="form-check">
+          <input class="form-check-input" type="radio" formControlName="city" id="city2" value="Milano" />
+          <label class="form-check-label" for="city2">Milano</label>
+        </div>
+        <div class="form-check">
+          <input class="form-check-input" type="radio" formControlName="city" id="city3" value="Napoli" />
+          <label class="form-check-label" for="city3">Napoli</label>
+        </div>
+        <div class="form-check">
+          <input class="form-check-input" type="radio" formControlName="city" id="city4" value="Palermo" />
+          <label class="form-check-label" for="city4">Palermo</label>
+        </div>
+        <div class="form-check">
+          <input class="form-check-input" type="radio" formControlName="city" id="city5" value="Roma" />
+          <label class="form-check-label" for="city5">Roma</label>
+        </div>
+        <div class="form-check">
+          <input class="form-check-input" type="radio" formControlName="city" id="city6" value="Torino" />
+          <label class="form-check-label" for="city6">Torino</label>
+        </div>
+        <div class="form-check">
+          <input class="form-check-input" type="radio" formControlName="city" id="city7" value="Venezia" />
+          <label class="form-check-label" for="city7">Venezia</label>
+        </div>
+      </div>
       <div *ngIf="f.controls['city'].invalid && f.controls['city'].touched" class=" mb-2 rounded p-2 alert-danger">
         <div>Campo obbligatorio</div>
       </div>

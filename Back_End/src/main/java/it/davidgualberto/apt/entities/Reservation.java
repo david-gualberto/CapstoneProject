@@ -33,4 +33,6 @@ public class Reservation {
 		private LocalDate date;
 		private LocalDate reservationDate;
 		private LocalTime hour;
+		private String city;
+		
 }

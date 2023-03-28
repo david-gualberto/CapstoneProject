@@ -5,6 +5,7 @@ import { LandingPageComponent } from './components/landing-page/landing-page.com
 import { LoginComponent } from './components/login/login.component';
 import { RegisterComponent } from './components/register/register.component';
 import { SearchResultsComponent } from './components/search-results/search-results.component';
+import { AuthGuardGuard } from './services/auth-guard.guard';
 
 const routes: Routes = [
   {
@@ -16,16 +17,18 @@ const routes: Routes = [
     component: LoginComponent,
   },
   {
-    path: 'home',
-    component: HomeComponent,
+    path: '',
+    component: LandingPageComponent,
   },
   {
     path: 'search',
-    component: SearchResultsComponent
+    component: SearchResultsComponent,
+    canActivate: [AuthGuardGuard],
   },
   {
-    path: '',
-    component: LandingPageComponent,
+    path: 'home',
+    component: HomeComponent,
+    canActivate: [AuthGuardGuard],
   },
 ];
 

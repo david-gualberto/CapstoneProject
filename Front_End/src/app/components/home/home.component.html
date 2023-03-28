@@ -10,8 +10,8 @@
     <div class="input-group container my-5">
       <div class="form-outline d-flex w-100">
         <div class="w-100">
-          <input type="search" id="searchBar" #searchBar class="form-control w-100 border bg-light" />
-          <label id="labelSearch" class="form-label" for="searchBar">Cerca il tuo ristorante preferito...</label>
+          <input type="search" id="searchBar" #searchBar class="form-control w-100 border bg-light" (keyup.enter)="search(searchBar.value)"/>
+          <label id="labelSearch" class="form-label" for="searchBar">Cerca nella tua città...</label>
         </div>
         <div>
           <button id="buttonSearch" type="button" class="ms-3 btn btn-primary">
@@ -21,18 +21,38 @@
       </div>
     </div>
   </div>
-  <div id="buttonContainer">
-  <img class="btn p-2 button" src="../../../assets/img/1404945.png" alt="">
-  <img class="btn p-2 button" src="../../../assets/img/1404945.png" alt="">
-  <img class="btn p-2 button" src="../../../assets/img/1404945.png" alt="">
-  <img class="btn p-2 button" src="../../../assets/img/1404945.png" alt="">
-  <img class="btn p-2 button" src="../../../assets/img/1404945.png" alt="">
-  <img class="btn p-2 button" src="../../../assets/img/1404945.png" alt="">
-  <img class="btn p-2 button" src="../../../assets/img/1404945.png" alt="">
+  <div class="w-100 text-center my-5 text-black">
+    <h2>Cosa vorresti mangiare?</h2>
   </div>
-  <!-- <div id="carousel" class="container" (mousedown)="onMouseDown($event)">
+  <div id="buttonContainer" class="my-5 text-black text-center">
     <div>
-      <h4 class="ms-2">Dove mangiare a Roma...</h4>
+      <img class="btn p-2 button" src="../../../assets/img/pizza.png"  alt="pizza" data-value="Pizza" (click)="getRestaurantbyTipe($event)">
+      <p>PIZZA</p>
+    </div>
+    <div>
+      <img class="btn p-2 button" src="../../../assets/img/sushi.webp" alt="sushi" data-value="Sushi" (click)="getRestaurantbyTipe($event)">
+      <p>SUSHI</p>
+    </div>
+    <div>
+      <img class="btn p-2 button" src="../../../assets/img/asian.png" alt="asian" data-value="Fusion" (click)="getRestaurantbyTipe($event)">
+      <p>ASIAN</p>
+    </div>
+    <div>
+      <img class="btn p-2 button" src="../../../assets/img/hamburger.png" alt="hamburger /amerincan food" data-value="Fast Food" (click)="getRestaurantbyTipe($event)">
+      <p>HAMBURGER</p>
+    </div>
+    <div>
+      <img class="btn p-2 button" src="../../../assets/img/pasta.png" alt="italian / mediterranean" data-value="Italian" (click)="getRestaurantbyTipe($event)">
+      <p>PASTA</p>
+    </div>
+    <div>
+      <img class="btn p-2 button" src="../../../assets/img/pesce.png" alt="italian / mediterranean" data-value="Seafood" (click)="getRestaurantbyTipe($event)">
+      <p>PESCE</p>
+    </div>
+  </div>
+  <div id="carousel" class="container" (mousedown)="onMouseDown($event)">
+    <div>
+      <h4 class="ms-2">Ecco i primi 10 ristoranti di {{user?.city}}...</h4>
     </div>
     <div>
       <i (click)="left()" id="left" class="fas fa-chevron-circle-left"></i>
@@ -45,6 +65,7 @@
     <div>
       <i (click)="right()" id="right" class="fas fa-chevron-circle-right"></i>
     </div>
-  </div> -->
+  </div>
   <app-footer></app-footer>
 </div>
+<router-outlet></router-outlet>

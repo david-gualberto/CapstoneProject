@@ -34,7 +34,7 @@ export class LoginComponent implements OnInit {
           throw err;
         })
       ).subscribe((res: JwtResponse) => {
-        this.r.navigate(['']);
+        this.r.navigate(['home']);
       });
   }
 }

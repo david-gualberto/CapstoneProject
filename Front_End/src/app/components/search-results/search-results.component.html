@@ -1,3 +1,15 @@
+
+<div class="progress" *ngIf="isLoading == true">
+  <div class="progress-bar" role="progressbar" [style.width.%]="progress" [attr.aria-valuenow]="progress"
+    aria-valuemin="0" aria-valuemax="100">
+    {{progress}}%
+  </div>
+</div>
+<div *ngIf="isLoading == false">
 <app-nav-bar></app-nav-bar>
-<p>search-results works!</p>
+<div id="containerMessage" class="container text-center w-100 my-5">
+  <p *ngIf="searchStatus == false">Torna alla <a routerLink="/home">Home</a> e inizia la tua ricerca...</p>
+  <p>{{resultMessage}}</p>
+</div>
 <app-footer></app-footer>
+</div>

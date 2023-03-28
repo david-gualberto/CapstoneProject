@@ -1,6 +1,8 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
+import jwtDecode from 'jwt-decode';
 import { ApiResponse, Records } from 'src/app/interfaces/api-response';
+import { JwtResponse } from 'src/app/interfaces/jwt-response';
 import { Restaurant } from 'src/app/interfaces/restaurant';
 import { RestaurantService } from 'src/app/services/restaurant.service';
 
@@ -9,16 +11,16 @@ import { RestaurantService } from 'src/app/services/restaurant.service';
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.scss'],
 })
-
 export class HomeComponent implements OnInit {
-
   @ViewChild('containerCard') containerCard: ElementRef | any;
   @ViewChild('searchBar') searchBar!: ElementRef;
 
-  constructor(private resServ: RestaurantService, private router:Router) {}
-  // variabili per progress bar
+  constructor(private resServ: RestaurantService, private router: Router) {}
+  //Variabile per progressbar
+  isLoading = true;
   progress: number = 0;
-  isLoading:boolean = true;
+  //variabili per dati utente
+  user!: JwtResponse | undefined;
 
   //variabili per chiamata ristoranti
   api!: ApiResponse;
@@ -32,10 +34,17 @@ export class HomeComponent implements OnInit {
 
   ngOnInit(): void {
     this.loadData();
-    //this.roma();
+    if (localStorage.getItem('user')) {
+      const userObj = JSON.parse(localStorage.getItem('user') ?? '');
+      this.user = userObj;
+      // if(this.user) {
+      //   this.getRestaurant(this.user.city);
+      // }
+    }
   }
 
   loadData() {
+    // simula il caricamento dei dati
     let timer = setInterval(() => {
       if (this.progress < 100) {
         this.progress += 10;
@@ -46,16 +55,14 @@ export class HomeComponent implements OnInit {
     }, 200);
   }
 
-  //  chiamata per i ristoranti roma
-  roma() {
-    this.resServ.getRestaurantRome().subscribe((res) => {
+  //  chiamata per i ristoranti in base alla città dell'utente loggato
+  getRestaurant(city: string) {
+    this.resServ.getRestaurantByCity(city).subscribe((res) => {
       this.api = res;
       this.record = this.api.data;
-      for(let i = 0; i<11; i++) {
-          this.listRestaurant.push(this.record.data[i])
+      for (let i = 0; i < 11; i++) {
+        this.listRestaurant.push(this.record.data[i]);
       }
-      //this.listRestaurant = this.record.data;
-      console.log(this.listRestaurant)
     });
   }
 
@@ -87,8 +94,15 @@ export class HomeComponent implements OnInit {
   }
 
   //search
-  search(value:string){
-    this.router.navigate(['/search'], { queryParams: { q: value } });
+  search(value: string) {
+    this.router.navigate(["search"], { queryParams: { q: value } });
   }
+   //filtraggio in base al tipo di ristorante
+  getRestaurantbyTipe(event: any) {
+    const value = event.target.dataset.value;
+    localStorage.setItem("tipo", value);
+    this.router.navigate(["search"])
+  }
+
 
 }
