@@ -3,33 +3,43 @@
 export interface Restaurant {
 averageRating: number,
 awardInfo:any,
-currentOpenStatusCategory: String,
-currentOpenStatusText: String
+currentOpenStatusCategory: string,
+currentOpenStatusText: string
 detailedReview: any,
-distanceTo: String,
-establishmentTypeAndCuisineTags: String[],
+distanceTo: string,
+establishmentTypeAndCuisineTags: string[],
 hasMenu: boolean,
 heroImgRawHeight: number,
 heroImgRawWidth: number,
-heroImgUrl: String
+heroImgUrl: string
 isDifferentGeo:boolean,
 isLocalChefItem: boolean,
 isPremium: boolean,
 isStoryboardPublished:boolean,
 locationId: number
-menuUrl: String,
-name: String,
+menuUrl:string,
+name: string,
 offers: any[],
-parentGeoName: String
-priceTag: String,
-restaurantsId: String
+parentGeoName: string
+priceTag: string,
+restaurantsId: string
 reviewSnippets: Review[],
 squareImgRawLength: number,
-squareImgUrl: String
+squareImgUrl: string
 userReviewCount: number
 }
 
 export interface Review {
-  reviewText: String;
-  reviewUrl: String;
+  reviewText: string;
+  reviewUrl:string;
+}
+
+export interface Favorite {
+  idrestaurant: string;
+  restaurant:string;
+}
+
+export interface FavoriteUser {
+  id: number;
+  idrestaurant:string;
 }

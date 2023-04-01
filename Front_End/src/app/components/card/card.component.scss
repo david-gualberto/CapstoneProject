@@ -3,15 +3,47 @@ width: 350px;
 height: 235px;
 }
 
+#priceTag {
+  color:#c69c6d
+}
+
+#typeCousine {
+  font-weight: 500;
+}
+
 #card{
-  height: 468px;
+  height: 420px;
+  position: relative;
+  i {
+    position:absolute;
+    color: #c69c6d;
+    font-size: 40px;
+    bottom:10px;
+    right:10px;
+  }
+}
+
+#title{
+  font-size: 1.1rem;
+  font-weight: 600;
+}
+
+.pointer {
+  cursor: pointer;
 }
 
 
 #cardBody {
   background-color: #f1e5d7;
+  padding-top: 10px;
 }
 
 .button {
   background-color: #c69c6d;
+}
+
+#prenota {
+  position: absolute;
+  bottom: 10px;
+  left: 23px;
 }

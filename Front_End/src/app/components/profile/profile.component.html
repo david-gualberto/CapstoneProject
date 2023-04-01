@@ -1,0 +1,40 @@
+<app-nav-bar></app-nav-bar>
+<div id="profileContainer" class="my-4 container-lg d-flex justify-content-between">
+  <div id="card" class="card">
+    <div id="profileIcone" class="text-center mt-4">
+      <i class="fas fa-user-circle"></i>.
+    </div>
+    <div class="card-body pb-2">
+      <h5 class="card-title"></h5>
+      <ul class="list-group list-group-flush">
+        <li class="text-dark list-group-item"><strong>Nome: </strong> {{this.userProfile?.name}}</li>
+        <li class="text-dark list-group-item"><strong>Cognome: </strong> {{this.userProfile?.surname}}</li>
+        <li class="text-dark list-group-item"><strong>Email: </strong> {{this.userProfile?.email}}</li>
+        <li class="text-dark list-group-item"><strong>Username: </strong> {{this.userProfile?.username}}</li>
+        <li class="text-dark list-group-item"><strong>Password: </strong> ************</li>
+        <li class="text-dark list-group-item"><strong>Città: </strong> {{this.userProfile?.city}}</li>
+        <li class="text-dark list-group-item"><strong>Indirizzo: </strong> {{this.userProfile?.street}}</li>
+        <li class="text-dark list-group-item"><strong>N: </strong> {{this.userProfile?.number}}</li>
+        <li class="text-dark list-group-item"><strong>Cap: </strong> {{this.userProfile?.postCode}}</li>
+      </ul>
+    </div>
+    <div>
+      <button class="btn ms-4 mb-4 text-dark" id="modifica" (click)="openModal()" type="submit">Modifica</button>
+    </div>
+  </div>
+  <div class="d-flex">
+    <div id="reservationList">
+      <h1 class="text-dark">Prenotazioni</h1>
+      <div *ngFor="let r of userReservation">
+        <app-horizontal-card class="text-dark" [reservation]="r"></app-horizontal-card>
+      </div>
+    </div>
+    <div id="favoriteList">
+      <h1>Preferiti</h1>
+      <div *ngFor="let f of userFavorite">
+        <app-horizontal-card-favorite [favorite]="f"></app-horizontal-card-favorite>
+      </div>
+    </div>
+  </div>
+</div>
+<app-footer></app-footer>

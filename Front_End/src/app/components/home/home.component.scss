@@ -1,4 +1,5 @@
 @import "~swiper/swiper-bundle.css";
+
 //progress bar
 .progress {
   position: fixed;
@@ -39,7 +40,7 @@
 #searchArea {
   display: flex;
   width: 100%;
-  height: 40vh;
+  height: 250px;
   background-image: url("../../../assets/img/food.jpg");
   background-size: contain;
   background-repeat: repeat;
@@ -100,6 +101,7 @@
   z-index: 1000;
 }
 
+
 .button {
   opacity: 0.8;
   padding: 5px 20px;
@@ -139,7 +141,7 @@
 
 @media (max-width: 450px) {
   #searchArea {
-    background-repeat: inherit;
+    background-size: cover;
     label {
       font-size: 0.8rem;
     }

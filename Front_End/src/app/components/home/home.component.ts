@@ -37,9 +37,9 @@ export class HomeComponent implements OnInit {
     if (localStorage.getItem('user')) {
       const userObj = JSON.parse(localStorage.getItem('user') ?? '');
       this.user = userObj;
-      // if(this.user) {
-      //   this.getRestaurant(this.user.city);
-      // }
+      if(this.user) {
+       //this.getRestaurant(this.user.city);
+      }
     }
   }
 
@@ -93,10 +93,6 @@ export class HomeComponent implements OnInit {
     this.isDragging = false;
   }
 
-  //search
-  search(value: string) {
-    this.router.navigate(["search"], { queryParams: { q: value } });
-  }
    //filtraggio in base al tipo di ristorante
   getRestaurantbyTipe(event: any) {
     const value = event.target.dataset.value;

@@ -52,7 +52,7 @@ public class ReservationController {
 					list.add(r);
 					x.setReservation(list);
 					us.save(x);
-					return new ResponseEntity<>("PRENOTAZIONE AGGIUNTA CON SUCCESSO", HttpStatus.OK);
+					return new ResponseEntity<>(HttpStatus.OK);
 			}
 		}
 

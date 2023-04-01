@@ -1,0 +1,15 @@
+<div id="searchArea" class="container-fluid">
+  <form class="input-group container my-5" (submit)="search(searchBar.value)">
+    <div class="form-outline d-flex w-100">
+      <div class="w-100">
+        <input type="search" id="searchBar"  #searchBar class="form-control w-100 border bg-light"/>
+        <label id="labelSearch" class="form-label" for="searchBar">Cerca nella tua città...</label>
+      </div>
+      <div>
+        <button id="buttonSearch" type="submit" class="ciao ms-3 btn btn-primary">
+          <i id="search" class="fas fa-search"></i>
+        </button>
+      </div>
+    </div>
+  </form>
+</div>

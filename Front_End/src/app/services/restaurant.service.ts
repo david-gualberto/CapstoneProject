@@ -2,21 +2,19 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { catchError } from 'rxjs';
 import { ApiResponse } from '../interfaces/api-response';
+import { Reservation } from '../interfaces/reservation';
+import { Favorite, FavoriteUser } from '../interfaces/restaurant';
 
 @Injectable({
   providedIn: 'root',
 })
 export class RestaurantService {
-  // idRome: number = 187791;
-  // idMilan: number = 187849;
-  // idNaples: number = 187785;
-  // idFlorence: number = 187895;
-  // idTurin: number = 187855;
-  // idVenice: number = 187870;
-  // idPalermo: number = 187890;
 
   urlLocation: String =
     'https://tripadvisor16.p.rapidapi.com/api/v1/restaurant/searchRestaurants?locationId=';
+   favoriteUrl: string = "http://localhost:9090/addFavorite_user=";
+   removeFavoriteUrl:string = "http://localhost:9090/removeFavorite/";
+   reservationUrl:string = "http://localhost:9090/reservation_user=";
 
   options = {
     method: 'GET',
@@ -60,5 +58,29 @@ export class RestaurantService {
           throw err;
         })
       );
+  }
+
+  addToFavorite(favorite:Favorite, userID:number){
+    return this.http.post<Favorite>(`${this.favoriteUrl}${userID}`, favorite)
+  }
+
+  removeFavorite(favorite:Favorite, userID:number){
+    return this.http.post<Favorite>(`${this.removeFavoriteUrl}${userID}`, favorite)
+  }
+
+  getFavorite(userID:number) {
+    return this.http.get<FavoriteUser>(`http://localhost:9090/getfavorite/${userID}`).pipe(
+      catchError((err) => {
+        throw err;
+      })
+    );
+  }
+
+  addreservation(reservation:Reservation, userID:number){
+    return this.http.post<Favorite>(`${this.reservationUrl}${userID}`, reservation).pipe(
+      catchError((err) => {
+        throw err;
+      })
+    );
   }
 }

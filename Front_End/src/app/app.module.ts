@@ -30,6 +30,13 @@ import { CardComponent } from './components/card/card.component';
 import { SearchResultsComponent } from './components/search-results/search-results.component';
 import { LandingPageComponent } from './components/landing-page/landing-page.component';
 import { ModalComponent } from './components/modal/modal.component';
+import { ModalReservationComponent } from './components/modal-reservation/modal-reservation.component';
+import { SearchAreaComponent } from './components/search-area/search-area.component';
+import { ModalConfirmReservationComponent } from './components/modal-confirm-reservation/modal-confirm-reservation.component';
+import { ProfileComponent } from './components/profile/profile.component';
+import { HorizontalCardComponent } from './components/horizontal-card-reservation/horizontal-card.component';
+import { ModalUpdateUserComponent } from './components/modal-update-user/modal-update-user.component';
+import { HorizontalCardFavoriteComponent } from './components/horizontal-card-favorite/horizontal-card-favorite.component';
 
 @NgModule({
   declarations: [
@@ -42,7 +49,14 @@ import { ModalComponent } from './components/modal/modal.component';
     CardComponent,
     SearchResultsComponent,
     LandingPageComponent,
-    ModalComponent
+    ModalComponent,
+    ModalReservationComponent,
+    SearchAreaComponent,
+    ModalConfirmReservationComponent,
+    ProfileComponent,
+    HorizontalCardComponent,
+    ModalUpdateUserComponent,
+    HorizontalCardFavoriteComponent
   ],
   imports: [
     HttpClientModule,

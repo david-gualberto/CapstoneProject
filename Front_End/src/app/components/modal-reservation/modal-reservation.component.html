@@ -1,0 +1,40 @@
+<div class="background modal-header">
+  <h3>{{this.info.restaurant}}</h3>
+  <button type="button" class="btn-close" aria-label="Close" (click)="modalRef.close()"></button>
+</div>
+<div class=" background modal-body">
+  <div id="form">
+    <form form [formGroup]="f" (ngSubmit)="reservation(f)">
+      <div>
+        <label mdbLabel class="form-label text-dark" for="number">Numero di persone:</label>
+        <input mdbInput type="number" id="number" class="form-control bg-light" formControlName="number" />
+        <div *ngIf="f.controls['number'].invalid && (f.controls['number'].dirty || f.controls['number'].touched)">
+          <p class="text-danger">Il numero deve essere minore di 8.</p>
+        </div>
+      </div>
+      <div class="my-3 d-flex flex-column">
+        <label class="mb-2 active" for="date">Quando:</label>
+        <input type="date" id="date" name="dateStandard" formControlName="date">
+        <div *ngIf="f.controls['date'].invalid && (f.controls['date'].dirty || f.controls['date'].touched)">
+          <p class="text-danger">La data deve essere odierna o successiva.</p>
+        </div>
+      </div>
+      <div>
+        <label class="mb-2 active" for="time">A che ora?</label>
+        <input class="form-control" id="time" type="time" formControlName="time">
+        <div *ngIf="f.controls['time'].invalid && (f.controls['time'].dirty || f.controls['time'].touched)">
+          <p class="text-danger">L'orario deve essere tra le 12.30 e le 14.30 oppure tra le 19.00 e le 22.30</p>
+        </div>
+      </div>
+      <button [disabled]="f.invalid" type="submit" class="btn button text-black mt-3">
+        Conferma
+      </button>
+    </form>
+  </div>
+  <p>{{err}}</p>
+</div>
+<div class=" background modal-footer">
+  <button type="button" class="btn button text-black" (click)="modalRef.close()">
+    Chiudi
+  </button>
+</div>

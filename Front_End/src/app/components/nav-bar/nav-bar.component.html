@@ -1,20 +1,13 @@
-<!-- Navbar -->
+
 <nav class="navbar navbar-expand-lg" id="navbar">
-  <!-- Container wrapper -->
   <div class="container-fluid">
-    <!-- Navbar brand -->
     <a class="ms-3 navbar-brand"><a class="navbar-brand cursor" routerLink="/home"><img src="../../../assets/img/logo_nav.png" alt="logo"
           id="logo"></a></a>
-
-    <!-- Toggle button -->
     <button class="navbar-toggler" type="button" (click)="basicNavbar.toggle()" aria-expanded="false"
       aria-label="Toggle navigation">
       <i id="menuHam" class="fas fa-bars"></i>
     </button>
-
-    <!-- Collapsible wrapper -->
     <div class="collapse navbar-collapse" id="navbarSupportedContent" mdbCollapse #basicNavbar="mdbCollapse">
-      <!-- Left links -->
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
         <li mdbDropdown class="mx-5 nav-item dropdown">
           <p class=" dropdown-toggle d-flex align-items-center" id="dropCitta" role="button" mdbDropdownToggle
@@ -44,44 +37,7 @@
             </li>
           </ul>
         </li>
-        <!-- <li mdbDropdown class=" nav-item dropdown">
-          <p class="mx-5 dropdown-toggle d-flex align-items-center" id="dropCitta" role="button" mdbDropdownToggle
-            aria-expanded="false">
-            Cosa vuoi mangiare?</p>
-          <ul mdbDropdownMenu class="dropdown-menu boxDropDown" aria-labelledby="dropCitta">
-            <li>
-              <a class="dropdown-item" href="#">Asiatico</a>
-            </li>
-            <li>
-              <a class="dropdown-item" href="#">Mediterraneo</a>
-            </li>
-            <li>
-              <a class="dropdown-item" href="#">Americano</a>
-            </li>
-            <li>
-              <a class="dropdown-item" href="#">Pizza</a>
-            </li>
-            <li>
-              <a class="dropdown-item" href="#">Sushi</a>
-            </li>
-            <li>
-              <a class="dropdown-item" href="#">Vegano</a>
-            </li>
-            <li>
-              <a class="dropdown-item" href="#">Hamburger</a>
-            </li>
-          </ul>
-        </li> -->
       </ul>
-      <!-- Left links -->
-      <!-- <div class="d-flex align-items-center" id="navButton" *ngIf="!logged">
-        <button type="button" class="btn button px-3 me-2" routerLink="login">
-          Login
-        </button>
-        <button type="button" class="btn button" routerLink="register">
-          Registrati
-        </button>
-      </div> -->
         <li mdbDropdown id="user" class="me-3 nav-item dropdown profile">
           <a class="nav-link dropdown-toggle d-flex align-items-center" id="iconaUser" role="button"
             mdbDropdownToggle aria-expanded="false">
@@ -92,13 +48,7 @@
               <p class=" mb-0 dropdown-item" *ngIf="user">Ciao, {{user.name}}</p>
             </li>
             <li>
-              <a class="dropdown-item cursor">Profilo</a>
-            </li>
-            <li>
-              <a class="dropdown-item cursor">Le mie prenotazioni</a>
-            </li>
-            <li>
-              <a class="dropdown-item cursor">I miei favoriti</a>
+              <a class="dropdown-item cursor" routerLink="/profile">Profilo</a>
             </li>
             <li>
               <a class="dropdown-item cursor" (click)="logout()">Logout</a>
@@ -106,8 +56,6 @@
           </ul>
         </li>
     </div>
-    <!-- Collapsible wrapper -->
   </div>
-  <!-- Container wrapper -->
 </nav>
-<!-- Navbar -->
+
