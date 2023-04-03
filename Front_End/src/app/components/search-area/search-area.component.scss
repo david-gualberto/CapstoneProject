@@ -25,7 +25,7 @@
 }
 
 
-@media (max-width: 450px) {
+@media screen and (max-width: 450px) {
   #searchArea {
     background-size: cover;
     label {

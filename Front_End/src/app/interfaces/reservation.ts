@@ -7,3 +7,8 @@ export interface Reservation {
   hour: string;
   city: string;
 }
+
+export interface ResInfo {
+  idrestaurant: string;
+  reservationDate: string;
+}

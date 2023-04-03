@@ -46,7 +46,7 @@ public class User {
 	@Size(min = 3)
 	private String username;
 	@NotBlank
-	private String password;
+    private String password;
 	@NotBlank
 	private String city;
 	@NotBlank

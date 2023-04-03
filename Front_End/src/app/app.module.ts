@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
@@ -29,7 +30,7 @@ import { HomeComponent } from './components/home/home.component';
 import { CardComponent } from './components/card/card.component';
 import { SearchResultsComponent } from './components/search-results/search-results.component';
 import { LandingPageComponent } from './components/landing-page/landing-page.component';
-import { ModalComponent } from './components/modal/modal.component';
+import { ModalComponent } from './components/modal-confirm-register/modal.component';
 import { ModalReservationComponent } from './components/modal-reservation/modal-reservation.component';
 import { SearchAreaComponent } from './components/search-area/search-area.component';
 import { ModalConfirmReservationComponent } from './components/modal-confirm-reservation/modal-confirm-reservation.component';
@@ -37,6 +38,10 @@ import { ProfileComponent } from './components/profile/profile.component';
 import { HorizontalCardComponent } from './components/horizontal-card-reservation/horizontal-card.component';
 import { ModalUpdateUserComponent } from './components/modal-update-user/modal-update-user.component';
 import { HorizontalCardFavoriteComponent } from './components/horizontal-card-favorite/horizontal-card-favorite.component';
+import { ModalConfirmDeleteResComponent } from './components/modal-confirm-delete-res/modal-confirm-delete-res.component';
+import { ModalModifyResComponent } from './components/modal-modify-res/modal-modify-res.component';
+import { ModalConfirmModifyComponent } from './components/modal-confirm-modify/modal-confirm-modify.component';
+import { ModalUserModifyConfirmComponent } from './components/modal-user-modify-confirm/modal-user-modify-confirm.component';
 
 @NgModule({
   declarations: [
@@ -56,10 +61,15 @@ import { HorizontalCardFavoriteComponent } from './components/horizontal-card-fa
     ProfileComponent,
     HorizontalCardComponent,
     ModalUpdateUserComponent,
-    HorizontalCardFavoriteComponent
+    HorizontalCardFavoriteComponent,
+    ModalConfirmDeleteResComponent,
+    ModalModifyResComponent,
+    ModalConfirmModifyComponent,
+    ModalUserModifyConfirmComponent
   ],
   imports: [
     HttpClientModule,
+    NgbModule,
     BrowserModule,
     AppRoutingModule,
     MdbAccordionModule,

@@ -43,26 +43,26 @@ export class SearchResultsComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    // this.loadData();
-    // if (localStorage.getItem('user')) {
-    //   const userObj = JSON.parse(localStorage.getItem('user') ?? '');
-    //   this.user = userObj;
-    // }
-    // if (localStorage.getItem('tipo')) {
-    //   this.tipo = localStorage.getItem('tipo')?.toString();
-    //   if (this.tipo) {
-    //     this.homeStatus = true;
-    //     this.getRestaurantByType(this.user.city, this.tipo);
-    //   }
-    // } else {
-    //   if (this.route.snapshot.queryParamMap.get('q')) {
-    //     this.homeStatus = true;
-    //     this.restaurantName = this.route.snapshot.queryParamMap.get('q');
-    //     this.search(this.restaurantName!);
-    //   } else {
-    //     this.searchStatus = false;
-    //   }
-    // }
+    this.loadData();
+    if (localStorage.getItem('user')) {
+      const userObj = JSON.parse(localStorage.getItem('user') ?? '');
+      this.user = userObj;
+    }
+    if (localStorage.getItem('tipo')) {
+      this.tipo = localStorage.getItem('tipo')?.toString();
+      if (this.tipo) {
+        this.homeStatus = true;
+        this.getRestaurantByType(this.user.city, this.tipo);
+      }
+    } else {
+      if (this.route.snapshot.queryParamMap.get('q')) {
+        this.homeStatus = true;
+        this.restaurantName = this.route.snapshot.queryParamMap.get('q');
+        this.search(this.restaurantName!);
+      } else {
+        this.searchStatus = false;
+      }
+    }
   }
 
   //Ricerca del ristorante per tipologia cucina

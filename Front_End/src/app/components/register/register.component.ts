@@ -5,7 +5,7 @@ import { catchError } from 'rxjs';
 import { Register } from 'src/app/interfaces/register';
 import { AuthService } from 'src/app/services/auth.service';
 import { MdbModalRef, MdbModalService } from 'mdb-angular-ui-kit/modal';
-import { ModalComponent } from '../modal/modal.component';
+import { ModalComponent } from '../modal-confirm-register/modal.component';
 
 
 @Component({
@@ -37,7 +37,7 @@ export class RegisterComponent implements OnInit {
       surname: new FormControl('', Validators.required),
       email: new FormControl('', [Validators.required, Validators.email,Validators.pattern(/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/)]),
       username: new FormControl('', Validators.required),
-      password: new FormControl('', [Validators.required, Validators.pattern(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/)]),
+      password: new FormControl('', [Validators.required, Validators.pattern( /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$/)]),
       city: new FormControl('', Validators.required),
       street: new FormControl('', Validators.required),
       number: new FormControl('', Validators.required),

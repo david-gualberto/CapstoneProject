@@ -1,18 +1,126 @@
-#profileIcone{
-  i{
+#profileIcone {
+  i {
     font-size: 50px;
     color: #c69c6d;
   }
 }
 
-#card{
-  background-color: #f1e5d7;
+.row  {
+  margin-inline: 0px;
 }
 
-.list-group-item{
+#card {
+  background-color: #f1e5d7;
+  width: 350px;
+  margin: auto;
+}
+
+.txt {
+  display: flex;
+  align-items: center;
+  color: #c69c6d;
+  padding: 0px;
+  font-size: 20px;
+}
+
+.errTxt {
+  font-size: 0.9rem;
+  margin-bottom: 10px;
+}
+
+#reservationList,
+#favoriteList {
+  i {
+    color: #c69c6d;
+  }
+}
+
+.list-group-item {
   background-color: #f1e5d7;
 }
 
 #modifica {
   background-color: #c69c6d;
 }
+
+
+#salva {
+  background-color: #c69c6d;
+  width: 102px
+}
+
+@media screen and (max-width: 350px) {
+
+  #card {
+    width: 300px;
+    margin: auto;
+  }
+}
+
+@media screen and (min-width: 992px) {
+  #card {
+    width: 600px;
+    height: 675px;
+    padding-bottom: 20px;
+  }
+  #profileContainer {
+    justify-content: center;
+  }
+
+  #buttonModify{
+    display: flex;
+    justify-content: space-around;
+    button {
+      margin:20px 0px;
+    }}
+}
+
+#eye {
+  position: absolute;
+  right: 10px;
+  top: 15px;
+}
+
+@media screen and (min-width: 1250px) {
+  #card {
+    width: 500px;
+    height: 680px;
+  }
+  #profileContainer {
+    justify-content: center;
+  }
+}
+
+@media screen and (max-width: 991px) {
+  #card {
+    padding-bottom: 20px;
+  }}
+
+@media screen and (min-width: 1400px) {
+
+  #profileContainer {
+    margin: 10px 0;
+  }
+}
+
+@media screen and (min-width: 767px) and (max-width: 991px) {
+  #card {
+    width: 400px;
+  }
+}
+
+@media screen and (min-width: 350px) and (max-width: 576px) {
+  #profileContainer {
+    margin: auto;
+  }}
+
+  @media screen and (min-width: 320px) and (max-width: 991px) {
+    #buttonModify{
+      display: flex;
+      justify-content: space-around;
+      button {
+        margin:20px 0px;
+      }
+    }
+}
+

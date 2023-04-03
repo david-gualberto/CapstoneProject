@@ -2,9 +2,11 @@ import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import jwtDecode from 'jwt-decode';
 import { ApiResponse, Records } from 'src/app/interfaces/api-response';
-import { JwtResponse } from 'src/app/interfaces/jwt-response';
+import { JwtResponse, User } from 'src/app/interfaces/jwt-response';
+import { Register } from 'src/app/interfaces/register';
 import { Restaurant } from 'src/app/interfaces/restaurant';
 import { RestaurantService } from 'src/app/services/restaurant.service';
+import { UserService } from 'src/app/services/user.service';
 
 @Component({
   selector: 'app-home',
@@ -15,12 +17,12 @@ export class HomeComponent implements OnInit {
   @ViewChild('containerCard') containerCard: ElementRef | any;
   @ViewChild('searchBar') searchBar!: ElementRef;
 
-  constructor(private resServ: RestaurantService, private router: Router) {}
+  constructor(private resServ: RestaurantService, private router: Router, private usServ:UserService) {}
   //Variabile per progressbar
   isLoading = true;
   progress: number = 0;
   //variabili per dati utente
-  user!: JwtResponse | undefined;
+  user!: User | undefined;
 
   //variabili per chiamata ristoranti
   api!: ApiResponse;
@@ -37,8 +39,11 @@ export class HomeComponent implements OnInit {
     if (localStorage.getItem('user')) {
       const userObj = JSON.parse(localStorage.getItem('user') ?? '');
       this.user = userObj;
+      this.usServ.getUser(this.user!.id).subscribe((res)=>{
+        this.user = res;
+      })
       if(this.user) {
-       //this.getRestaurant(this.user.city);
+      this.getRestaurant(this.user.city);
       }
     }
   }

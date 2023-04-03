@@ -19,6 +19,10 @@
   top: 12px;
 }
 
+#radioButton {
+  display: flex;
+  justify-content: space-between;}
+
 #link {
   cursor: pointer;
 }
@@ -40,14 +44,28 @@ input[type="number"]::-webkit-outer-spin-button {
   margin: 0;
 }
 
-@media (min-width: 768px) {
+@media screen and (min-width: 768px) {
   #formContainer {
     width: 600px;
   }
 }
 
-@media (min-width: 1600px) {
+@media screen and (min-width: 1600px) {
   #fakeBody {
     padding-bottom: 230px;
+  }
+}
+
+@media screen and (max-width: 550px) {
+  #radioButton {
+    flex-wrap: wrap;
+  }
+}
+
+@media screen and (max-width: 360px) {
+  #imgContainer {
+    img {
+      width: 320px;
+    }
   }
 }

@@ -1,0 +1,37 @@
+#card {
+  background-color:  #f1e5d7;
+  border: 1px solid #c69c6d;
+  width: 300px;
+}
+
+#city{
+  font-size: 0.9rem
+}
+
+#reservationIcon{
+  i{
+    color: #c69c6d;
+  }
+}
+
+#delete, #edit{
+  background-color: #c69c6d;
+  color:black;
+  i {
+    font-size: 20px;
+    color: black;
+  }
+}
+
+@media screen and (min-width: 767px) and (max-width: 991px) {
+  #card{
+width: 400px;
+ }
+ }
+
+ @media screen and (min-width: 992px) {
+  #card{
+width: 300px;
+ }
+ }
+

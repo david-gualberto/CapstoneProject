@@ -1,39 +1,191 @@
 <app-nav-bar></app-nav-bar>
-<div id="profileContainer" class="my-4 container-lg d-flex justify-content-between">
-  <div id="card" class="card">
+<div id="profileContainer" class="row my-5 w-100">
+  <div id="card" class="col-lg-4 card d-flex justify-content-center">
     <div id="profileIcone" class="text-center mt-4">
       <i class="fas fa-user-circle"></i>.
     </div>
-    <div class="card-body pb-2">
+    <div class="card-body px-0 pb-0">
       <h5 class="card-title"></h5>
       <ul class="list-group list-group-flush">
-        <li class="text-dark list-group-item"><strong>Nome: </strong> {{this.userProfile?.name}}</li>
-        <li class="text-dark list-group-item"><strong>Cognome: </strong> {{this.userProfile?.surname}}</li>
-        <li class="text-dark list-group-item"><strong>Email: </strong> {{this.userProfile?.email}}</li>
-        <li class="text-dark list-group-item"><strong>Username: </strong> {{this.userProfile?.username}}</li>
-        <li class="text-dark list-group-item"><strong>Password: </strong> ************</li>
-        <li class="text-dark list-group-item"><strong>Città: </strong> {{this.userProfile?.city}}</li>
-        <li class="text-dark list-group-item"><strong>Indirizzo: </strong> {{this.userProfile?.street}}</li>
-        <li class="text-dark list-group-item"><strong>N: </strong> {{this.userProfile?.number}}</li>
-        <li class="text-dark list-group-item"><strong>Cap: </strong> {{this.userProfile?.postCode}}</li>
+        <li class="text-dark list-group-item py-0">
+          <ng-container *ngIf="!name; else editNameTemplate">
+            <div class="d-flex justify-content-between">
+              <p class=" mb-0"> <strong>Nome:<br> </strong> {{this.userProfile?.name}}</p>
+              <i (click)="edit('name')" class="txt far fa-pen-to-square"></i>
+          </div>
+          </ng-container>
+          <ng-template #editNameTemplate>
+            <div class="input-group">
+              <input type="text" class="form-control my-2" [(ngModel)]="this.userProfile!.name">
+            </div>
+          </ng-template>
+        </li>
+
+        <li class="text-dark list-group-item py-0">
+          <ng-container *ngIf="!surname; else editSurnameTemplate">
+            <div class="d-flex justify-content-between">
+              <p class=" mb-0"><strong>Cognome:<br> </strong> {{this.userProfile?.surname}}</p>
+              <i (click)="edit('surname')" class="txt far fa-pen-to-square"></i>
+          </div>
+          </ng-container>
+          <ng-template #editSurnameTemplate>
+            <div class="input-group">
+              <input type="text" class="form-control my-2" [(ngModel)]="this.userProfile!.surname">
+            </div>
+          </ng-template>
+        </li>
+        <li class="text-dark list-group-item py-0">
+          <ng-container *ngIf="!email; else editEmailTemplate">
+            <div class="d-flex justify-content-between">
+              <p class=" mb-0"><strong>Email:<br> </strong> {{this.userProfile?.email}}</p>
+              <i (click)="edit('email')" class="txt far fa-pen-to-square"></i>
+          </div>
+          </ng-container>
+          <ng-template #editEmailTemplate>
+            <div class="input-group">
+              <input type="text" class="form-control my-2" [(ngModel)]="this.userProfile!.email">
+            </div>
+          </ng-template>
+          <div *ngIf="emailErr">
+            <p class="errTxt text-danger">Formato email errato</p>
+          </div>
+        </li>
+        <li class="text-dark list-group-item py-0">
+          <ng-container *ngIf="!username; else editUsernameTemplate">
+            <div class="d-flex justify-content-between">
+            <p class=" mb-0"><strong>Username:<br> </strong> {{this.userProfile?.username}}</p>
+            <i (click)="edit('username')" class="txt far fa-pen-to-square"></i>
+          </div>
+          </ng-container>
+          <ng-template #editUsernameTemplate>
+            <div class="input-group">
+              <input type="text" class="form-control my-2" [(ngModel)]="this.userProfile!.username">
+            </div>
+          </ng-template>
+          <div *ngIf="errUsername">
+            <p class="errTxt text-danger">L'username deve avere almeno 3 caratteri</p>
+          </div>
+        </li>
+        <li class="text-dark list-group-item py-0">
+          <ng-container *ngIf="!password; else editPasswordTemplate">
+            <div class="d-flex justify-content-between">
+              <p class=" mb-0"><strong>Password:<br> </strong> ************</p>
+            <i (click)="edit('password')" class="txt far fa-pen-to-square"></i>
+          </div>
+          </ng-container>
+          <ng-template #editPasswordTemplate>
+            <div class="input-group">
+              <input mdbInput [type]="passwordFieldType" type="password" class="form-control my-2" [(ngModel)]="this.userProfile!.password" minlength="8">
+              <span id="eye" class="fas" (click)="mostraNascondiPassword()" [class.fa-eye]="passwordFieldType === 'password'"
+              [class.fa-eye-slash]="passwordFieldType !== 'password'"></span>
+            </div>
+          </ng-template>
+          <div *ngIf="errMessage">
+            <p class="errTxt text-danger">La password deve contenere almeno 8 caratteri con almeno 1 maiuscola, 1 minuscola e un carattere numerico</p>
+          </div>
+        </li>
+        <li class="text-dark list-group-item  py-0">
+          <ng-container *ngIf="!city; else editCityTemplate">
+            <div class="d-flex justify-content-between">
+              <p class=" mb-0"><strong>Città:<br> </strong> {{this.userProfile?.city}}</p>
+              <i (click)="edit('city')" class="txt far fa-pen-to-square"></i>
+            </div>
+          </ng-container>
+          <ng-template #editCityTemplate>
+            <div class="input-group">
+              <select class="form-select my-1" [(ngModel)]="this.userProfile!.city">
+                <option value="Milano">Milano</option>
+                <option value="Roma">Roma</option>
+                <option value="Palermo">Palermo</option>
+                <option value="Venezia">Venezia</option>
+                <option value="Napoli">Napoli</option>
+                <option value="Firenze">Firenze</option>
+                <option value="Torino">Torino</option>
+              </select>
+            </div>
+          </ng-template>
+        </li>
+        <li class="text-dark list-group-item  py-0">
+          <ng-container *ngIf="!street; else editStreetTemplate">
+            <div class="d-flex justify-content-between">
+              <p class=" mb-0"><strong>Indirizzo:<br> </strong> {{this.userProfile?.street}}</p>
+              <i (click)="edit('street')" class="txt far fa-pen-to-square"></i>
+            </div>
+          </ng-container>
+          <ng-template #editStreetTemplate>
+            <div class="input-group">
+              <input type="text" class="form-control my-2" [(ngModel)]="this.userProfile!.street">
+            </div>
+          </ng-template>
+        </li>
+        <li class="text-dark list-group-item py-0">
+          <ng-container *ngIf="!number; else editNumberTemplate">
+            <div class="d-flex justify-content-between">
+              <p class=" mb-0"><strong>Numero:<br> </strong> {{this.userProfile?.number}}</p>
+              <i (click)="edit('number')" class="txt far fa-pen-to-square"></i>
+            </div>
+          </ng-container>
+          <ng-template #editNumberTemplate>
+            <div class="input-group">
+              <input type="number" class="form-control my-2" [(ngModel)]="this.userProfile!.number">
+            </div>
+          </ng-template>
+        </li>
+        <li class="text-dark list-group-item py-0">
+          <ng-container *ngIf="!postCode; else editpostCodeTemplate">
+            <div class="d-flex justify-content-between">
+            <p class="mb-0"><strong>Cap:<br> </strong> {{this.userProfile?.postCode}}</p>
+            <i (click)="edit('postCode')" class="txt far fa-pen-to-square"></i>
+          </div>
+          </ng-container>
+          <ng-template #editpostCodeTemplate>
+            <div class="input-group">
+              <input type="number" class="form-control my-2" [(ngModel)]="this.userProfile!.postCode">
+            </div>
+          </ng-template>
+        </li>
       </ul>
     </div>
-    <div>
-      <button class="btn ms-4 mb-4 text-dark" id="modifica" (click)="openModal()" type="submit">Modifica</button>
+    <div id="buttonModify" *ngIf="buttonSave">
+      <button (click)="save()" class="btn text-dark" id="salva" type="submit">Salva</button>
+      <button (click)="cancel()" class="btn text-dark" id="modifica" type="submit">Annulla</button>
     </div>
   </div>
-  <div class="d-flex">
-    <div id="reservationList">
-      <h1 class="text-dark">Prenotazioni</h1>
-      <div *ngFor="let r of userReservation">
-        <app-horizontal-card class="text-dark" [reservation]="r"></app-horizontal-card>
-      </div>
-    </div>
-    <div id="favoriteList">
-      <h1>Preferiti</h1>
-      <div *ngFor="let f of userFavorite">
-        <app-horizontal-card-favorite [favorite]="f"></app-horizontal-card-favorite>
-      </div>
+  <div id="reservationList" class="col-lg-4 mt-4 d-flex flex-column align-items-center">
+    <nav aria-label="Page navigation">
+      <ul class="pagination d-flex justify-content-center mb-0">
+        <li class="page-item" [class.disabled]="currentPageRes == 1">
+          <a class="page-link" (click)="previousPageRes()"><i class="fas fa-angles-left"></i></a>
+        </li>
+        <li class="page-item" [class.active]="currentPageRes == i" *ngFor="let i of pagesRes()">
+          <a class="page-link" (click)="changePageRes(i)">{{i}}</a>
+        </li>
+        <li class="page-item" [class.disabled]="currentPageRes == pagesRes().length">
+          <a class="page-link" (click)="nextPageRes()"><i class="fas fa-angles-right"></i></a>
+        </li>
+      </ul>
+    </nav>
+    <h1 class="text-dark text-center">Prenotazioni</h1>
+    <app-horizontal-card *ngFor="let reservation of displayedReservations" [reservation]="reservation"
+      (reservationDeleted)="onReservationDeleted()" (reservationModify)="onReservationDeleted()"></app-horizontal-card>
+  </div>
+  <div id="favoriteList" class="col-lg-4 d-flex flex-column align-items-center">
+    <nav aria-label="Page navigation">
+      <ul class="pagination d-flex justify-content-center mt-4 mb-0">
+        <li class="page-item" [class.disabled]="currentPageFav == 1">
+          <a class="page-link" (click)="previousPageFav()"><i class="fas fa-angles-left"></i></a>
+        </li>
+        <li class="page-item" [class.active]="currentPageFav == i" *ngFor="let i of pagesFav()">
+          <a class="page-link" (click)="changePageFav(i)">{{i}}</a>
+        </li>
+        <li class="page-item" [class.disabled]="currentPageFav == pagesFav().length">
+          <a class="page-link" (click)="nextPageFav()"><i class="fas fa-angles-right"></i></a>
+        </li>
+      </ul>
+    </nav>
+    <h1 class="text-dark text-center">Preferiti</h1>
+    <div *ngFor="let f of displayedFav">
+      <app-horizontal-card-favorite [favorite]="f"></app-horizontal-card-favorite>
     </div>
   </div>
 </div>

@@ -1,0 +1,19 @@
+<div class="modal-wrapper">
+  <div class="modal-content background">
+    <div class="modal-header">
+      <h5 class="modal-title">Conferma eliminazione prenotazione</h5>
+      <button type="button" class="btn-close" aria-label="Close" (click)="modalRef.close()"></button>
+    </div>
+    <div class="modal-body">
+      Sei sicuro di voler eliminare la prenotazione?
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn button text-dark" (click)="modalRef.close()">
+        Annulla
+      </button>
+      <button type="button" class="btn button text-dark" (click)="confirmDelete()">
+        Conferma
+      </button>
+    </div>
+  </div>
+</div>
