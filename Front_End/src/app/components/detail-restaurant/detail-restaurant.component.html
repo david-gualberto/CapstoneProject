@@ -1,0 +1,87 @@
+<app-nav-bar></app-nav-bar>
+<div id="container-fluid">
+  <div id="top" class="container-md mt-5">
+    <div id="imgRes">
+      <img class="circle" src="{{detailRest.photo.images.large.url}}" alt="restaurant_image">
+    </div>
+    <div id="nameRating" class="d-flex flex-column mt-3">
+      <div class="d-flex">
+        <h3 class="card-title mb-3 me-3 text-dark">{{detailRest.name}}</h3>
+        <i [ngClass]="isfavorite ? 'fas': 'far'" class="fa-bookmark pointer" (click)="addFavorite()"></i>
+      </div>
+      <div id="rating" class="d-flex" [innerHTML]="rating(ratingRest)"></div>
+    </div>
+    <div id="imgTravelerContainer" *ngIf="travelerChoice == true">
+      <img src="../../../assets/img/trip.png" alt="">
+      <p class="mt-0">{{overview.award.yearsText}}</p>
+    </div>
+    <div id="contactContainer">
+      <h3 id="contactTitle" class="text-dark">Contatti:</h3>
+      <div id="contact" class="container-fluid">
+        <div class="d-flex mb-2">
+          <i class="fas fa-map-location-dot me-2"></i><a
+            href="https://www.google.com/maps/search/?api=1&query={{detailRest.address}}"
+            target="_blank">{{detailRest.address}}</a>
+        </div>
+        <div class="d-flex mb-2">
+          <i class="fas fa-at me-2"></i><a href="mailto:{{detailRest.email}}">{{detailRest.email}}</a>
+        </div>
+        <div class="d-flex mb-2">
+          <i class="fas fa-globe me-2"></i><a href="{{detailRest.website}}" target="_blank">{{detailRest.website}}</a>
+        </div>
+        <div class="d-flex">
+          <i class="fas fa-feather-pointed me-2"></i><a href="{{detailRest.write_review}}" target="_blank">Lascia una
+            tua recensione</a>
+        </div>
+      </div>
+    </div>
+    <div id="infoContainer">
+      <h3 id="infoTitle" class="text-dark">Info:</h3>
+      <div id="infoRes">
+        <h5 class="text-dark mb-1">Tipo:</h5>
+        <p class="txt mb-0">{{detailRest.cuisine[0].name}}</p>
+        <p class="txt mb-0">{{detailRest.cuisine[1].name}}</p>
+        <div>
+          <h5 class="text-dark mb-1">Costo:</h5>
+          <p class="txt">{{detailRest.price_level}}</p>
+        </div>
+        <div id="status">
+          <small class="text-dark">{{detailRest.open_now_text}}</small>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div id="formContainer">
+    <h2>Prenota subito il tuo tavolo:</h2>
+    <div>
+      <form form [formGroup]="f" (ngSubmit)="reservation(f)">
+        <div>
+          <label mdbLabel class="form-label text-dark" for="number">Numero di persone:</label>
+          <input mdbInput type="number" id="number" class="form-control bg-light" formControlName="number" />
+          <div *ngIf="f.controls['number'].invalid && (f.controls['number'].dirty || f.controls['number'].touched)">
+            <p class="text-danger">Il numero deve essere minore di 8.</p>
+          </div>
+        </div>
+        <div class="my-3 d-flex flex-column">
+          <label class="mb-2 active" for="date">Quando:</label>
+          <input type="date" id="date" name="dateStandard" formControlName="date">
+          <div *ngIf="f.controls['date'].invalid && (f.controls['date'].dirty || f.controls['date'].touched)">
+            <p class="text-danger">La data deve essere odierna o successiva.</p>
+          </div>
+        </div>
+        <div>
+          <label class="mb-2 active" for="time">A che ora?</label>
+          <input class="form-control" id="time" type="time" formControlName="time">
+          <div *ngIf="f.controls['time'].invalid && (f.controls['time'].dirty || f.controls['time'].touched)">
+            <p class="text-danger">L'orario deve essere tra le 12.30 e le 14.30 oppure tra le 19.00 e le 22.30</p>
+          </div>
+        </div>
+        <button id="confirm" [disabled]="f.invalid" type="submit" class="btn text-black mt-3">
+          Conferma
+        </button>
+        <p class="mt-2 text-danger">{{err}}</p>
+      </form>
+    </div>
+  </div>
+</div>
+<app-footer></app-footer>

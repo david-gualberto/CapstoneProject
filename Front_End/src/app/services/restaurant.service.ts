@@ -1,9 +1,10 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { catchError } from 'rxjs';
-import { ApiResponse } from '../interfaces/api-response';
+import { ApiResponse, ApiResponseDetails } from '../interfaces/api-response';
 import { Reservation } from '../interfaces/reservation';
 import { Favorite, FavoriteUser } from '../interfaces/restaurant';
+import { DetailsRestaurant } from '../interfaces/details-restaurant';
 
 @Injectable({
   providedIn: 'root',
@@ -78,6 +79,14 @@ export class RestaurantService {
 
   addreservation(reservation:Reservation, userID:number){
     return this.http.post<Favorite>(`${this.reservationUrl}${userID}`, reservation).pipe(
+      catchError((err) => {
+        throw err;
+      })
+    );
+  }
+
+  getDetailsRest(id:string){
+    return this.http.get<ApiResponseDetails>(`https://tripadvisor16.p.rapidapi.com/api/v1/restaurant/getRestaurantDetails?restaurantsId=${id}`, this.options).pipe(
       catchError((err) => {
         throw err;
       })

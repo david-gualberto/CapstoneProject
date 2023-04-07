@@ -1,4 +1,5 @@
 import { Component, Input } from '@angular/core';
+import { Router } from '@angular/router';
 import { Favorite } from 'src/app/interfaces/restaurant';
 import { RestaurantService } from 'src/app/services/restaurant.service';
 
@@ -12,5 +13,9 @@ export class HorizontalCardFavoriteComponent {
 
   favorite!: Favorite;
 
-  constructor(private resSrv:RestaurantService) { }
+  constructor(private resSrv:RestaurantService, private r:Router) { }
+
+  detailRes(){
+    this.r.navigate(['details'], { queryParams: { id: this.favorite.idrestaurant } });
+  }
 }

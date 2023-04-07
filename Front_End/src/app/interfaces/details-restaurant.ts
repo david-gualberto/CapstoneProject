@@ -40,7 +40,7 @@ export interface DetailsRestaurant {
   email: string;
   address_obj: address;
   address: string;
-  hours: any;
+  hours: Hours;
   is_candidate_for_contact_info_suppression: boolean;
   cuisine: cuisine[];
   dietary_restrictions: restrictions[];
@@ -67,6 +67,20 @@ export interface restrictions {
   key: string;
   name: string;
 }
+
+export interface Hours {
+    week_ranges:weekRange[],
+    timezone: string,
+}
+
+ export interface weekRange {
+   day:day[]
+ }
+
+export interface day {
+    open_time: number,
+    close_time: number
+        }
 
 export interface photoRestaurant {
   id: string;

@@ -7,6 +7,7 @@ import { ProfileComponent } from './components/profile/profile.component';
 import { RegisterComponent } from './components/register/register.component';
 import { SearchResultsComponent } from './components/search-results/search-results.component';
 import { AuthGuardGuard } from './services/auth-guard.guard';
+import { DetailRestaurantComponent } from './components/detail-restaurant/detail-restaurant.component';
 
 const routes: Routes = [
   {
@@ -24,6 +25,11 @@ const routes: Routes = [
   {
     path: 'search',
     component: SearchResultsComponent,
+    canActivate: [AuthGuardGuard],
+  },
+  {
+    path: 'details',
+    component: DetailRestaurantComponent,
     canActivate: [AuthGuardGuard],
   },
   {

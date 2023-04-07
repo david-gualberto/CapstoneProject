@@ -1,6 +1,6 @@
 <div class="card mb-3" id="card">
   <div class="card-body pb-0">
-    <h5 class="card-title">{{reservation.restaurant}} - <span id="city">{{reservation.city}}</span></h5>
+    <h5 id="title" class="card-title"><a (click)="detailRes()">{{reservation.restaurant}}</a></h5>
     <div id="reservationIcon" class="d-flex justify-content-between">
       <p><i class="fas fa-person"></i>{{reservation.numPax}}</p>
       <p><i class="far fa-calendar"></i> {{reservation.reservationDate}}</p>

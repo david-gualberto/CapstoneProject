@@ -1,14 +1,14 @@
 <div id="card" class="card">
   <div id="topCard" class="bg-image hover-overlay ripple" data-mdb-ripple-color="light">
-    <img id="imgRestaurant" src={{restaurant.heroImgUrl}} />
+   <img  id="imgRestaurant" src={{restaurant.heroImgUrl}} />
     <div class="mask" style="background-color: rgba(251, 251, 251, 0.15);"></div>
   </div>
   <div id="cardBody" class="card-body">
     <div>
-      <p class="mb-2" id="title">{{restaurant.name}}</p>
+      <p class="mb-2" id="title"><a (click)=" detailRes()">{{restaurant.name}}</a></p>
       <div class="d-flex justify-content-between">
         <p class="mb-2"> Prezzo: <span id="priceTag">{{restaurant.priceTag}}</span></p>
-        <p>{{restaurant.currentOpenStatusText}}</p>
+        <p><b>{{restaurant.currentOpenStatusText}}</b></p>
       </div>
     </div>
     <p class="card-text">Tipo: <span id="typeCousine">{{restaurant.establishmentTypeAndCuisineTags[0]}}</span></p>

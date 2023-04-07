@@ -4,16 +4,19 @@
   width: 300px;
 }
 
-#city{
-  font-size: 0.9rem
-}
-
 #reservationIcon{
   i{
     color: #c69c6d;
   }
 }
-
+#title{
+  a {
+    text-decoration: none;
+    color: black;
+    &:hover{
+      color: #c69c6d;
+    }  }
+}
 #delete, #edit{
   background-color: #c69c6d;
   color:black;

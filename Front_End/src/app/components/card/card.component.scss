@@ -26,6 +26,11 @@ height: 235px;
 #title{
   font-size: 1.1rem;
   font-weight: 600;
+  a {
+    color: black;
+    &:hover{
+      color: #c69c6d;
+    }  }
 }
 
 .pointer {

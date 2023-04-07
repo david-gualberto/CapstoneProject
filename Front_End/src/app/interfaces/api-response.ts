@@ -1,4 +1,5 @@
 import { DetailsRestaurant } from "./details-restaurant";
+import { Overview } from "./overview";
 import { Restaurant } from "./restaurant";
 
 //Interfacce per filtraggio ristoranti
@@ -26,9 +27,9 @@ export interface ApiResponseDetails {
 
 
 export interface dataDetails {
-  location: DetailsRestaurant,
   hours:any,
+  location: DetailsRestaurant,
+  overview:Overview,
   ownerStatus:any,
   ownerLikelihood: any,
-  overview:any
 }

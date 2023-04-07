@@ -1,3 +1,4 @@
+import { JsonPipe } from '@angular/common';
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import jwtDecode from 'jwt-decode';
@@ -17,7 +18,11 @@ export class HomeComponent implements OnInit {
   @ViewChild('containerCard') containerCard: ElementRef | any;
   @ViewChild('searchBar') searchBar!: ElementRef;
 
-  constructor(private resServ: RestaurantService, private router: Router, private usServ:UserService) {}
+  constructor(
+    private resServ: RestaurantService,
+    private router: Router,
+    private usServ: UserService
+  ) { }
   //Variabile per progressbar
   isLoading = true;
   progress: number = 0;
@@ -39,12 +44,10 @@ export class HomeComponent implements OnInit {
     if (localStorage.getItem('user')) {
       const userObj = JSON.parse(localStorage.getItem('user') ?? '');
       this.user = userObj;
-      this.usServ.getUser(this.user!.id).subscribe((res)=>{
+      this.usServ.getUser(this.user!.id).subscribe((res) => {
         this.user = res;
-      })
-      if(this.user) {
-      this.getRestaurant(this.user.city);
-      }
+        this.getRestaurant(this.user!.city);
+      });
     }
   }
 
@@ -66,9 +69,23 @@ export class HomeComponent implements OnInit {
       this.api = res;
       this.record = this.api.data;
       for (let i = 0; i < 11; i++) {
+        if (this.record.data[i].currentOpenStatusText.includes('Opens in')) {
+          this.record.data[i].currentOpenStatusText = 'Aprirà a breve';
+        } else if (this.record.data[i].currentOpenStatusText.includes('Open')) {
+          this.record.data[i].currentOpenStatusText = 'Aperto';
+        } else if (
+          this.record.data[i].currentOpenStatusText.includes('Closed')
+        ) {
+          this.record.data[i].currentOpenStatusText = 'Chiuso';
+        }
+        this.transalteCusine(
+          this.record.data[i].establishmentTypeAndCuisineTags[0],
+          i
+        );
         this.listRestaurant.push(this.record.data[i]);
       }
     });
+    console.log(this.listRestaurant);
   }
 
   // scroll-x tramite i bottoni
@@ -98,12 +115,70 @@ export class HomeComponent implements OnInit {
     this.isDragging = false;
   }
 
-   //filtraggio in base al tipo di ristorante
+  //filtraggio in base al tipo di ristorante
   getRestaurantbyTipe(event: any) {
     const value = event.target.dataset.value;
-    localStorage.setItem("tipo", value);
-    this.router.navigate(["search"])
+    localStorage.setItem('tipo', value);
+    this.router.navigate(['search']);
   }
 
-
+  transalteCusine(type: string, i: number) {
+    switch (type) {
+      case 'Seafood':
+        this.record.data[i].establishmentTypeAndCuisineTags[0] = 'Di mare';
+        break;
+      case 'Italian':
+        this.record.data[i].establishmentTypeAndCuisineTags[0] = 'Italiana';
+        break;
+      case 'American':
+        this.record.data[i].establishmentTypeAndCuisineTags[0] = 'Americana';
+        break;
+      case 'Dining bars':
+        this.record.data[i].establishmentTypeAndCuisineTags[0] = 'Bistrot';
+        break;
+      case 'Northern-Italian':
+        this.record.data[i].establishmentTypeAndCuisineTags[0] = 'Nord Italia';
+        break;
+      case 'Filipino':
+        this.record.data[i].establishmentTypeAndCuisineTags[0] = 'Asiatico';
+        break;
+      case 'Japanese':
+        this.record.data[i].establishmentTypeAndCuisineTags[0] = 'Giapponese';
+        break;
+      case 'Middle Eastern':
+        this.record.data[i].establishmentTypeAndCuisineTags[0] =
+          'Mediorientale';
+        break;
+      case 'Iternational':
+        this.record.data[i].establishmentTypeAndCuisineTags[0] =
+          'Internazionale';
+        break;
+      case 'Indian':
+        this.record.data[i].establishmentTypeAndCuisineTags[0] = 'Indiana';
+        break;
+      case 'Tuscan':
+        this.record.data[i].establishmentTypeAndCuisineTags[0] =
+          'Cucina Toscana';
+        break;
+      case 'Brew Pub':
+        this.record.data[i].establishmentTypeAndCuisineTags[0] = 'Birreria';
+        break;
+      case 'Mediterranean':
+        this.record.data[i].establishmentTypeAndCuisineTags[0] = 'Mediterranea';
+        break;
+      case 'Barbecue':
+        this.record.data[i].establishmentTypeAndCuisineTags[0] = 'Barbecue';
+        break;
+      case 'Pizza':
+        this.record.data[i].establishmentTypeAndCuisineTags[0] = 'Pizza';
+        break;
+      case 'Fusion':
+        this.record.data[i].establishmentTypeAndCuisineTags[0] = 'Fusion';
+        break;
+      default:
+        this.record.data[i].establishmentTypeAndCuisineTags[0] =
+          'Bar Ristorante';
+        break;
+    }
+  }
 }

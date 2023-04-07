@@ -36,12 +36,12 @@ import { SearchAreaComponent } from './components/search-area/search-area.compon
 import { ModalConfirmReservationComponent } from './components/modal-confirm-reservation/modal-confirm-reservation.component';
 import { ProfileComponent } from './components/profile/profile.component';
 import { HorizontalCardComponent } from './components/horizontal-card-reservation/horizontal-card.component';
-import { ModalUpdateUserComponent } from './components/modal-update-user/modal-update-user.component';
 import { HorizontalCardFavoriteComponent } from './components/horizontal-card-favorite/horizontal-card-favorite.component';
 import { ModalConfirmDeleteResComponent } from './components/modal-confirm-delete-res/modal-confirm-delete-res.component';
 import { ModalModifyResComponent } from './components/modal-modify-res/modal-modify-res.component';
 import { ModalConfirmModifyComponent } from './components/modal-confirm-modify/modal-confirm-modify.component';
 import { ModalUserModifyConfirmComponent } from './components/modal-user-modify-confirm/modal-user-modify-confirm.component';
+import { DetailRestaurantComponent } from './components/detail-restaurant/detail-restaurant.component';
 
 @NgModule({
   declarations: [
@@ -60,12 +60,12 @@ import { ModalUserModifyConfirmComponent } from './components/modal-user-modify-
     ModalConfirmReservationComponent,
     ProfileComponent,
     HorizontalCardComponent,
-    ModalUpdateUserComponent,
     HorizontalCardFavoriteComponent,
     ModalConfirmDeleteResComponent,
     ModalModifyResComponent,
     ModalConfirmModifyComponent,
-    ModalUserModifyConfirmComponent
+    ModalUserModifyConfirmComponent,
+    DetailRestaurantComponent
   ],
   imports: [
     HttpClientModule,

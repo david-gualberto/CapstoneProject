@@ -1,10 +1,11 @@
-import { ChangeDetectorRef, Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { MdbModalRef, MdbModalService } from 'mdb-angular-ui-kit/modal';
 import { catchError } from 'rxjs';
 import { JwtResponse } from 'src/app/interfaces/jwt-response';
 import { Favorite, FavoriteUser, Restaurant } from 'src/app/interfaces/restaurant';
 import { RestaurantService } from 'src/app/services/restaurant.service';
 import { ModalReservationComponent } from '../modal-reservation/modal-reservation.component';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-card',
@@ -25,7 +26,7 @@ export class CardComponent implements OnInit {
    //modale
    modalRef: MdbModalRef<ModalReservationComponent> | null = null;
 
-  constructor(private resSrv:RestaurantService, private modalService: MdbModalService) { }
+  constructor(private resSrv:RestaurantService, private modalService: MdbModalService, private r:Router) { }
 
   ngOnInit(): void {
     if (localStorage.getItem('user')) {
@@ -45,6 +46,7 @@ export class CardComponent implements OnInit {
   }
 
   openModal() {
+    console.log(this.restaurant)
     this.restaurantLocation(this.restaurant.parentGeoName);
     let infoRes:Favorite = {
       idrestaurant: this.restaurant.restaurantsId,
@@ -104,6 +106,10 @@ export class CardComponent implements OnInit {
       this.restaurantCity= "Venezia";
       break;
     }
+  }
+
+  detailRes(){
+    this.r.navigate(['details'], { queryParams: { id: this.restaurant.restaurantsId } });
   }
 
 }

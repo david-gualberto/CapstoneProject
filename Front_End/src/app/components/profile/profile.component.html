@@ -11,7 +11,7 @@
           <ng-container *ngIf="!name; else editNameTemplate">
             <div class="d-flex justify-content-between">
               <p class=" mb-0"> <strong>Nome:<br> </strong> {{this.userProfile?.name}}</p>
-              <i (click)="edit('name')" class="txt far fa-pen-to-square"></i>
+              <i (click)="edit('name')" class="txt far fa-pen-to-square pointer"></i>
           </div>
           </ng-container>
           <ng-template #editNameTemplate>
@@ -25,7 +25,7 @@
           <ng-container *ngIf="!surname; else editSurnameTemplate">
             <div class="d-flex justify-content-between">
               <p class=" mb-0"><strong>Cognome:<br> </strong> {{this.userProfile?.surname}}</p>
-              <i (click)="edit('surname')" class="txt far fa-pen-to-square"></i>
+              <i (click)="edit('surname')" class="txt far fa-pen-to-square pointer"></i>
           </div>
           </ng-container>
           <ng-template #editSurnameTemplate>
@@ -38,7 +38,7 @@
           <ng-container *ngIf="!email; else editEmailTemplate">
             <div class="d-flex justify-content-between">
               <p class=" mb-0"><strong>Email:<br> </strong> {{this.userProfile?.email}}</p>
-              <i (click)="edit('email')" class="txt far fa-pen-to-square"></i>
+              <i (click)="edit('email')" class="txt far fa-pen-to-square pointer"></i>
           </div>
           </ng-container>
           <ng-template #editEmailTemplate>
@@ -54,7 +54,7 @@
           <ng-container *ngIf="!username; else editUsernameTemplate">
             <div class="d-flex justify-content-between">
             <p class=" mb-0"><strong>Username:<br> </strong> {{this.userProfile?.username}}</p>
-            <i (click)="edit('username')" class="txt far fa-pen-to-square"></i>
+            <i (click)="edit('username')" class="txt far fa-pen-to-square pointer"></i>
           </div>
           </ng-container>
           <ng-template #editUsernameTemplate>
@@ -70,7 +70,7 @@
           <ng-container *ngIf="!password; else editPasswordTemplate">
             <div class="d-flex justify-content-between">
               <p class=" mb-0"><strong>Password:<br> </strong> ************</p>
-            <i (click)="edit('password')" class="txt far fa-pen-to-square"></i>
+            <i (click)="edit('password')" class="txt far fa-pen-to-square pointer"></i>
           </div>
           </ng-container>
           <ng-template #editPasswordTemplate>
@@ -80,15 +80,12 @@
               [class.fa-eye-slash]="passwordFieldType !== 'password'"></span>
             </div>
           </ng-template>
-          <div *ngIf="errMessage">
-            <p class="errTxt text-danger">La password deve contenere almeno 8 caratteri con almeno 1 maiuscola, 1 minuscola e un carattere numerico</p>
-          </div>
         </li>
         <li class="text-dark list-group-item  py-0">
           <ng-container *ngIf="!city; else editCityTemplate">
             <div class="d-flex justify-content-between">
               <p class=" mb-0"><strong>Città:<br> </strong> {{this.userProfile?.city}}</p>
-              <i (click)="edit('city')" class="txt far fa-pen-to-square"></i>
+              <i (click)="edit('city')" class="txt far fa-pen-to-square pointer"></i>
             </div>
           </ng-container>
           <ng-template #editCityTemplate>
@@ -109,7 +106,7 @@
           <ng-container *ngIf="!street; else editStreetTemplate">
             <div class="d-flex justify-content-between">
               <p class=" mb-0"><strong>Indirizzo:<br> </strong> {{this.userProfile?.street}}</p>
-              <i (click)="edit('street')" class="txt far fa-pen-to-square"></i>
+              <i (click)="edit('street')" class="txt far fa-pen-to-square pointer"></i>
             </div>
           </ng-container>
           <ng-template #editStreetTemplate>
@@ -122,7 +119,7 @@
           <ng-container *ngIf="!number; else editNumberTemplate">
             <div class="d-flex justify-content-between">
               <p class=" mb-0"><strong>Numero:<br> </strong> {{this.userProfile?.number}}</p>
-              <i (click)="edit('number')" class="txt far fa-pen-to-square"></i>
+              <i (click)="edit('number')" class="txt far fa-pen-to-square pointer"></i>
             </div>
           </ng-container>
           <ng-template #editNumberTemplate>
@@ -135,7 +132,7 @@
           <ng-container *ngIf="!postCode; else editpostCodeTemplate">
             <div class="d-flex justify-content-between">
             <p class="mb-0"><strong>Cap:<br> </strong> {{this.userProfile?.postCode}}</p>
-            <i (click)="edit('postCode')" class="txt far fa-pen-to-square"></i>
+            <i (click)="edit('postCode')" class="txt far fa-pen-to-square pointer"></i>
           </div>
           </ng-container>
           <ng-template #editpostCodeTemplate>

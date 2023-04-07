@@ -1,9 +1,12 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { Observable, forkJoin } from 'rxjs';
 import { ApiResponse, Records } from 'src/app/interfaces/api-response';
-import { JwtResponse } from 'src/app/interfaces/jwt-response';
+import { JwtResponse, UserProfile } from 'src/app/interfaces/jwt-response';
 import { Restaurant } from 'src/app/interfaces/restaurant';
+import { CityServiceService } from 'src/app/services/city-service.service';
 import { RestaurantService } from 'src/app/services/restaurant.service';
+import { UserService } from 'src/app/services/user.service';
 
 @Component({
   selector: 'app-search-results',
@@ -29,40 +32,77 @@ export class SearchResultsComponent implements OnInit {
   //variabili per chiamata api
   api!: ApiResponse;
   record!: Records;
-  user!: JwtResponse;
+  user!:UserProfile| undefined;
 
   //variabili per lista ristoranti e ristorante singolo
   tipo!: string | undefined;
+  cityTitle: boolean = false;
+  city!:string | null;
   restaurantName!: string | null;
+  singleRestaurant!:Restaurant;
   listRestaurant: Restaurant[] = [];
   typeRestaurant: Restaurant[] = [];
 
   constructor(
     private route: ActivatedRoute,
-    private resServ: RestaurantService
+    private resServ: RestaurantService,
+    private usServ:UserService,
+    private cityService: CityServiceService
   ) {}
 
   ngOnInit(): void {
+    this.city = this.cityService.getCity();
+    this.typeRestaurant = [];
     this.loadData();
     if (localStorage.getItem('user')) {
       const userObj = JSON.parse(localStorage.getItem('user') ?? '');
       this.user = userObj;
-    }
-    if (localStorage.getItem('tipo')) {
-      this.tipo = localStorage.getItem('tipo')?.toString();
-      if (this.tipo) {
-        this.homeStatus = true;
-        this.getRestaurantByType(this.user.city, this.tipo);
-      }
-    } else {
-      if (this.route.snapshot.queryParamMap.get('q')) {
-        this.homeStatus = true;
-        this.restaurantName = this.route.snapshot.queryParamMap.get('q');
-        this.search(this.restaurantName!);
+      this.usServ.getUser(this.user!.id).subscribe((res)=>{
+        this.user = res;
+      })
+      if (localStorage.getItem('tipo')) {
+        this.tipo = localStorage.getItem('tipo')?.toString();
+        if (this.tipo) {
+          this.homeStatus = true;
+          this.getRestaurantByType(this.user!.city, this.tipo);
+        }
       } else {
-        this.searchStatus = false;
+        if (this.city) {
+          this.cityTitle = true;
+          this.homeStatus = true;
+          this.getRestaurant(this.city);
+        } else if (this.route.snapshot.queryParamMap.get('q')) {
+          this.cityTitle = false;
+          this.homeStatus = true;
+          this.restaurantName = this.route.snapshot.queryParamMap.get('q');
+          this.search(this.restaurantName!);
+        } else {
+          this.searchStatus = false;
+        }
       }
     }
+  }
+
+
+ //Ricerca del ristorante per città
+  getRestaurant(city: string) {
+    this.searchStatus = true;
+    this.resServ.getRestaurantByCity(city).subscribe((res) => {
+      this.api = res;
+      this.record = this.api.data;
+      for (let i = 0; i < 20; i++) {
+      this.singleRestaurant = this.record.data[i];
+      if (this.singleRestaurant.currentOpenStatusText.includes("Opens in")) {
+        this.singleRestaurant.currentOpenStatusText = "Aprirà a breve"
+      } else if (this.singleRestaurant.currentOpenStatusText.includes("Open")) {
+        this.singleRestaurant.currentOpenStatusText = "Aperto"
+      } else if (this.singleRestaurant.currentOpenStatusText.includes("Closed")) {
+        this.singleRestaurant.currentOpenStatusText = "Chiuso"
+      }
+        this.transalteCusine(this.singleRestaurant.establishmentTypeAndCuisineTags[0])
+        this.typeRestaurant.push(this.singleRestaurant);
+      }
+    });
   }
 
   //Ricerca del ristorante per tipologia cucina
@@ -77,25 +117,56 @@ export class SearchResultsComponent implements OnInit {
           restaurant.establishmentTypeAndCuisineTags[0] == tipo ||
           restaurant.establishmentTypeAndCuisineTags[1] == tipo
         ) {
-          this.typeRestaurant.push(restaurant);
+          this.singleRestaurant = restaurant;
+          this.transalteCusine(this.singleRestaurant.establishmentTypeAndCuisineTags[0])
+          if (this.singleRestaurant.currentOpenStatusText.includes("Opens in")) {
+            this.singleRestaurant.currentOpenStatusText = "Aprirà a breve"
+          } else if (this.singleRestaurant.currentOpenStatusText.includes("Open")) {
+            this.singleRestaurant.currentOpenStatusText = "Aperto"
+          } else if (this.singleRestaurant.currentOpenStatusText.includes("Closed")) {
+            this.singleRestaurant.currentOpenStatusText = "Chiuso"
+          }
+          this.typeRestaurant.push(this.singleRestaurant);
         }
       });
+      if(this.typeRestaurant.length < 1) {
+        this.searchStatus = false;
+        this.resultMessage = `Non ci sono ristoranti disponibili in questa categoria`;
+      }
     });
     localStorage.removeItem('tipo');
   }
 
   //Ricerca del ristorante per nome completo o parziale
   search(x: string) {
+    this.cityTitle = false;
     const searchStr = x.toLowerCase();
-    this.resServ.getRestaurantByCity(this.user.city).subscribe((res) => {
-      this.api = res;
-      this.record = this.api.data;
-      this.listRestaurant = this.record.data;
-      this.listRestaurant.forEach((restaurant) => {
-        const nameStr = restaurant.name.toLowerCase();
-        if (nameStr.includes(searchStr)) {
-          this.typeRestaurant.push(restaurant);
-        }
+    let obs: Observable<any>[] = [];
+    if (this.city != null) {
+      obs.push(this.resServ.getRestaurantByCity(this.city));
+    }
+    if (this.user?.city != null && this.user.city !== this.city) {
+      obs.push(this.resServ.getRestaurantByCity(this.user.city));
+    }
+    forkJoin(obs).subscribe((results) => {
+      this.typeRestaurant = [];
+      results.forEach((res) => {
+        const restaurants = res.data.data;
+        restaurants.forEach((restaurant:any) => {
+          const nameStr = restaurant.name.toLowerCase();
+          if (nameStr.indexOf(searchStr) !== -1) {
+            this.singleRestaurant = restaurant;
+            if (this.singleRestaurant.currentOpenStatusText.includes("Opens in")) {
+              this.singleRestaurant.currentOpenStatusText = "Aprirà a breve"
+            } else if (this.singleRestaurant.currentOpenStatusText.includes("Open")) {
+              this.singleRestaurant.currentOpenStatusText = "Aperto"
+            } else if (this.singleRestaurant.currentOpenStatusText.includes("Closed")) {
+              this.singleRestaurant.currentOpenStatusText = "Chiuso"
+            }
+            this.transalteCusine(this.singleRestaurant.establishmentTypeAndCuisineTags[0])
+            this.typeRestaurant.push(restaurant);
+          }
+        });
       });
       if (this.typeRestaurant.length > 0) {
         this.searchStatus = true;
@@ -153,4 +224,61 @@ export class SearchResultsComponent implements OnInit {
     this.typeRestaurant = [];
     this.search(value);
   }
+
+  transalteCusine(type:string){
+    switch(type) {
+      case 'Seafood':
+        this.singleRestaurant.establishmentTypeAndCuisineTags[0] = 'Di mare';
+      break;
+      case 'Italian':
+        this.singleRestaurant.establishmentTypeAndCuisineTags[0] = 'Italiana';
+      break;
+      case 'American':
+        this.singleRestaurant.establishmentTypeAndCuisineTags[0] = 'Americana';
+      break;
+      case 'Dining bars':
+        this.singleRestaurant.establishmentTypeAndCuisineTags[0] = 'Bistrot';
+      break;
+      case 'Northern-Italian':
+        this.singleRestaurant.establishmentTypeAndCuisineTags[0] = 'Nord Italia';
+      break;
+      case 'Filipino':
+        this.singleRestaurant.establishmentTypeAndCuisineTags[0] = 'Asiatico';
+      break;
+      case 'Japanese':
+        this.singleRestaurant.establishmentTypeAndCuisineTags[0] = 'Giapponese';
+      break;
+      case 'Middle Eastern':
+        this.singleRestaurant.establishmentTypeAndCuisineTags[0] = 'Mediorientale';
+      break;
+      case 'Iternational':
+        this.singleRestaurant.establishmentTypeAndCuisineTags[0] = 'Internazionale';
+      break;
+      case 'Indian':
+        this.singleRestaurant.establishmentTypeAndCuisineTags[0] = 'Indiana';
+      break;
+        case 'Tuscan':
+          this.singleRestaurant.establishmentTypeAndCuisineTags[0] = 'Cucina Toscana';
+        break;
+        case 'Brew Pub':
+          this.singleRestaurant.establishmentTypeAndCuisineTags[0] = 'Birreria';
+        break;
+        case 'Mediterranean':
+          this.singleRestaurant.establishmentTypeAndCuisineTags[0] = 'Mediterranea';
+        break;
+        case 'Barbecue':
+          this.singleRestaurant.establishmentTypeAndCuisineTags[0] = 'Barbecue';
+        break;
+        case 'Pizza':
+          this.singleRestaurant.establishmentTypeAndCuisineTags[0] = 'Pizza';
+        break;
+        case 'Fusion':
+          this.singleRestaurant.establishmentTypeAndCuisineTags[0] = 'Fusion';
+        break;
+        default:
+          this.singleRestaurant.establishmentTypeAndCuisineTags[0] = 'Bar Ristorante';
+          break
+
+  }
+}
 }

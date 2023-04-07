@@ -232,6 +232,9 @@ if(this.validateEmail() || !this.email) {
         .subscribe((res) => {
           this.modalService.open(ModalUserModifyConfirmComponent);
         });
+        let user = JSON.parse(localStorage.getItem('user') ?? "");
+        user.city = this.userProfile!.city,
+        localStorage.setItem('user', JSON.stringify(user));
       this.errUsername = false;
       this.errMessage = false;
       this.emailErr = false;

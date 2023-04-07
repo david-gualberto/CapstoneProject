@@ -15,11 +15,12 @@
       </div>
     </div>
     <div *ngIf="searchStatus == true" id="carousel" class="container my-5" (mousedown)="onMouseDown($event)">
+      <h2 *ngIf="cityTitle == true">Ecco i ristoranti di {{city}}</h2>
       <div>
         <i (click)="left()" id="left" class="fas fa-chevron-circle-left"></i>
       </div>
       <div #containerCard id="containerCard" class="container" (mousemove)="onMouseMove($event)"
-        (mouseup)="onMouseUp()">
+        (mouseup)="onMouseUp()"  [ngClass]="{'justify-content-center': typeRestaurant.length < 5}">
         <div id="card" class="card m-2" *ngFor="let l of typeRestaurant">
           <app-card [restaurant]="l"></app-card>
         </div>

@@ -11,6 +11,17 @@
   }
 }
 
+#title{
+  font-size: 1.1rem;
+  font-weight: 600;
+  a {
+    text-decoration: none;
+    color: black;
+    &:hover{
+      color: #c69c6d;
+    }  }
+}
+
 @media screen and (min-width: 767px) and (max-width: 991px) {
   #favoriteCard{
 width: 400px;

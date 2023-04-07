@@ -21,7 +21,6 @@ public class RegisterRequest {
 	@NotBlank
 	private String username;
 	@NotBlank
-	@Pattern(regexp = "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@$!%*?&])[A-Za-z\\d@$!%*?&]{8,}$")
 	private String password;
 	@NotBlank
 	private String city;

@@ -69,36 +69,6 @@ public class ReservationController {
 
 	}
 	
-	@PostMapping("/user={idUser}_reservation={idRes}")
-	public ResponseEntity<?> deleteUserReservation(@PathVariable Integer idRes, @PathVariable Integer idUser) {
-		Optional<User> userObj = us.getById(idUser);
-		if (!userObj.isPresent()) {
-			return new ResponseEntity<>("UTENTE NON TROVATO", HttpStatus.NOT_FOUND);
-		}
-		User user = userObj.get();
-		List<Reservation> reservations = user.getReservation();
-		Optional<Reservation> resObj = rs.getById(idRes);
-		if (!resObj.isPresent()) {
-			return new ResponseEntity<>("PRENOTAZIONE NON TROVATA", HttpStatus.NOT_FOUND);
-		}
-		Reservation reservationToDelete = resObj.get();
-		boolean reservationFound = false;
-		for (Reservation reservation : reservations) {
-			if (reservation.equals(reservationToDelete)) {
-				reservations.remove(reservation);
-				user.setReservation(reservations);
-				us.save(user);
-				reservationFound = true;
-				break;
-			}
-		}
-		if (reservationFound) {
-			return new ResponseEntity<>("Prenotazione cancellata", HttpStatus.OK);
-		} else {
-			return new ResponseEntity<>("PRENOTAZIONE NON TROVATA", HttpStatus.NOT_FOUND);
-		}
-	}
-	
 	
 	@GetMapping("/getreservation/{id}")
 	public ResponseEntity<List<ReservationUser>> getReservationByUser(@PathVariable Integer id) {
@@ -118,36 +88,39 @@ public class ReservationController {
 	}
 	
 	@PostMapping("/removeReservation/{id}")
-	public ResponseEntity<?> removeFavorite(@Valid @RequestBody Reservation r, @PathVariable Integer id) {
-		Optional<User> UserObj = us.getById(id);
-		if (!UserObj.isPresent()) {
-			return new ResponseEntity<>("UTENTE NON TROVATO", HttpStatus.NOT_FOUND);
-		} else {
-			User x = UserObj.get();
-			Reservation w = null;
-			List <Reservation> list = x.getReservation();
-			LocalDate resDate = r.getReservationDate();
-			String restaurantId = r.getIdrestaurant();
-			List <Reservation> newList = new ArrayList<>();
-			for (Reservation res : list) {
-			    if (!res.getIdrestaurant().equals(restaurantId) && !res.getReservationDate().isEqual(resDate)) {
-			        newList.add(res);
-			    }
-			    else {
-			    	if (list.contains(res)) {
-	                    w=res;
-	                }
-			    }
-			}
-			x.setReservation(newList);
-			us.save(x);
-			rs.delete(w);
-			return new ResponseEntity<>(newList,HttpStatus.OK);
-		}
+	public ResponseEntity<?> removeReservation(@Valid @RequestBody Reservation r, @PathVariable Integer id) {
+	    Optional<User> userObj = us.getById(id);
+	    if (!userObj.isPresent()) {
+	        return new ResponseEntity<>("UTENTE NON TROVATO", HttpStatus.NOT_FOUND);
+	    }
+	    User user = userObj.get();
+	    LocalDate reservationDate = r.getReservationDate();
+	    String restaurantId = r.getIdrestaurant();
+	    List<Reservation> reservations = user.getReservation();
+	    List<Reservation> newReservations = new ArrayList<>();
+	    Reservation reservationToDelete = null;
+	    for (Reservation reservation : reservations) {
+	        if (reservation.getIdrestaurant().equals(restaurantId) && reservation.getReservationDate().isEqual(reservationDate)) {
+	            reservationToDelete = reservation;
+	        } else {
+	            newReservations.add(reservation);
+	        }
+	    }
+	    if (reservationToDelete != null) {
+	        newReservations.remove(reservationToDelete);
+	        user.setReservation(newReservations);
+	        us.save(user);
+	        rs.delete(reservationToDelete);
+	        return new ResponseEntity<>(newReservations, HttpStatus.OK);
+	    } else {
+	        return new ResponseEntity<>("PRENOTAZIONE NON TROVATA", HttpStatus.NOT_FOUND);
+	    }
 	}
 	
 	@PutMapping("/updateRes/user/{id}/reservation/{date}/{idres}")
-	public ResponseEntity<?> updateRes(@Valid @RequestBody Reservation r, @PathVariable Integer id, @PathVariable @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate date,@PathVariable String idres ){
+	public ResponseEntity<?> updateRes(@Valid @RequestBody Reservation r, @PathVariable Integer id, 
+	                                    @PathVariable @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate date, 
+	                                    @PathVariable String idres) {
 	    Optional<User> UserObj = us.getById(id);
 	    if (!UserObj.isPresent()) {
 	        return new ResponseEntity<>("UTENTE NON TROVATO", HttpStatus.NOT_FOUND);
@@ -156,12 +129,23 @@ public class ReservationController {
 	        List<Reservation> reservations = x.getReservation();
 	        boolean found = false;
 	        for (int i = 0; i < reservations.size(); i++) {
-	            if (reservations.get(i).getIdrestaurant().equals(idres) && reservations.get(i).getReservationDate().isEqual(date) ) {
+	            if (reservations.get(i).getIdrestaurant().equals(idres) && reservations.get(i).getReservationDate().isEqual(date)) {
 	                found = true;
-	                Reservation updatedReservation = reservations.get(i);
-	                updatedReservation.setReservationDate(r.getReservationDate());
-	                updatedReservation.setHour(r.getHour());
-	                updatedReservation.setNumPax(r.getNumPax());
+	                Reservation existingReservation = reservations.get(i);
+	                if (existingReservation.getReservationDate().isEqual(r.getReservationDate())) {
+	                    // new reservation date is the same as the existing one
+	                    return new ResponseEntity<>("La nuova data di prenotazione è identica a quella esistente", HttpStatus.BAD_REQUEST);
+	                }
+	                // check if the new reservation date is already booked
+	                for (Reservation res : reservations) {
+	                    if (res.getReservationDate().equals(r.getReservationDate())) {
+	                        return new ResponseEntity<>("La data di prenotazione selezionata è già stata prenotata", HttpStatus.CONFLICT);
+	                    }
+	                }
+	                // update the existing reservation
+	                existingReservation.setReservationDate(r.getReservationDate());
+	                existingReservation.setHour(r.getHour());
+	                existingReservation.setNumPax(r.getNumPax());
 	                us.save(x);
 	                break;
 	            }
@@ -173,5 +157,6 @@ public class ReservationController {
 	        }
 	    }
 	}
+	
 	
 }

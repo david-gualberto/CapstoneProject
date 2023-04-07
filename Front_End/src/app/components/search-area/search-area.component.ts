@@ -12,8 +12,9 @@ export class SearchAreaComponent {
 
   @Output() searchEvent = new EventEmitter<string>();
 
-  search(value: string) {
+  search(value: string, searchBar: HTMLInputElement) {
     this.router.navigate(['search'], { queryParams: { q: value } });
     this.searchEvent.emit(value);
+    searchBar.value = ''; // Imposta il valore del campo di input su una stringa vuota
   }
 }

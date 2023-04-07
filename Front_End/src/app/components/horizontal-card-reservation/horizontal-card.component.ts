@@ -33,7 +33,6 @@ export class HorizontalCardComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-
     if (localStorage.getItem('user')) {
       const userObj = JSON.parse(localStorage.getItem('user') ?? '');
       this.user = userObj;
@@ -42,6 +41,7 @@ export class HorizontalCardComponent implements OnInit {
   }
 
   remove() {
+    console.log(this.reservation)
     this.modalRef = this.modalService.open(ModalConfirmDeleteResComponent);
     this.modalRef.onClose.subscribe((result) => {
       if (result) {
@@ -62,6 +62,10 @@ export class HorizontalCardComponent implements OnInit {
         this.reservationModify.emit();
       }
     })
+  }
+
+  detailRes(){
+    this.r.navigate(['details'], { queryParams: { id: this.reservation.idrestaurant } });
   }
 
 }

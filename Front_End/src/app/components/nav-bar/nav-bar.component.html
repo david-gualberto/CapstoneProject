@@ -1,8 +1,8 @@
 
 <nav class="navbar navbar-expand-lg" id="navbar">
   <div class="container-fluid">
-    <a class="ms-3 navbar-brand"><a class="navbar-brand cursor" routerLink="/home"><img src="../../../assets/img/logo_nav.png" alt="logo"
-          id="logo"></a></a>
+    <a class="ms-3 navbar-brand"><a class="navbar-brand cursor" (click)="home()"><img src="../../../assets/img/logo_nav.png" alt="logo"
+          id="logo"></a> </a>
     <button class="navbar-toggler" type="button" (click)="basicNavbar.toggle()" aria-expanded="false"
       aria-label="Toggle navigation">
       <i id="menuHam" class="fas fa-bars"></i>
@@ -15,29 +15,30 @@
             Dove vuoi mangiare?</p>
           <ul mdbDropdownMenu class="dropdown-menu boxDropDown" aria-labelledby="dropCitta">
             <li>
-              <a class="dropdown-item" href="#">Torino</a>
+              <a class="dropdown-item" (click)="changeCity('Torino')">Torino</a>
             </li>
             <li>
-              <a class="dropdown-item" href="#">Milano</a>
+              <a class="dropdown-item" (click)="changeCity('Milano')">Milano</a>
             </li>
             <li>
-              <a class="dropdown-item" href="#">Venezia</a>
+              <a class="dropdown-item" (click)="changeCity('Venezia')">Venezia</a>
             </li>
             <li>
-              <a class="dropdown-item" href="#">Firenze</a>
+              <a class="dropdown-item" (click)="changeCity('Firenze')">Firenze</a>
             </li>
             <li>
-              <a class="dropdown-item" href="#">Roma</a>
+              <a class="dropdown-item" (click)="changeCity('Roma')">Roma</a>
             </li>
             <li>
-              <a class="dropdown-item" href="#">Napoli</a>
+              <a class="dropdown-item" (click)="changeCity('Napoli')">Napoli</a>
             </li>
             <li>
-              <a class="dropdown-item" href="#">Palermo</a>
+              <a class="dropdown-item" (click)="changeCity('Palermo')">Palermo</a>
             </li>
           </ul>
         </li>
       </ul>
+      <div id="infoProfile">
         <li mdbDropdown id="user" class="me-3 nav-item dropdown profile">
           <a class="nav-link dropdown-toggle d-flex align-items-center" id="iconaUser" role="button"
             mdbDropdownToggle aria-expanded="false">
@@ -55,6 +56,12 @@
             </li>
           </ul>
         </li>
+        <div id="weather" class="d-flex flex-row ">
+          <p>{{user!.city}}</p>
+          <img src="{{iconWeather}}" alt="">
+          <p>{{temp}}</p>
+        </div>
+      </div>
     </div>
   </div>
 </nav>

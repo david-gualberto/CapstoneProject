@@ -8,4 +8,9 @@ import { MdbModalRef } from 'mdb-angular-ui-kit/modal';
 })
 export class ModalConfirmReservationComponent {
   constructor(public modalRef: MdbModalRef<ModalConfirmReservationComponent>) {}
+
+  close() {
+    location.reload();
+    this.modalRef.close();
+  }
 }
